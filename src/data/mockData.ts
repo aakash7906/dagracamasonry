@@ -2,11 +2,10 @@ import type { NavItem, ServiceItem, ProjectItem, GalleryItem, TestimonialItem, C
 
 export const navigationLinks: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Craftsmanship', href: '/#portfolio' },
+  { label: 'Services', href: '/services' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'About Us', href: '/about' },
-  { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'Testimonials', href: '/testimonials' },
   { label: 'Contact Us', href: '/contact' },
 ];
 
@@ -284,5 +283,32 @@ export const testimonialsData: TestimonialItem[] = [
     quote: 'From our 2,000 sq ft bluestone terrace to the outdoor fireplace, every cut and joint line is razor-sharp. They accommodated customized design revisions seamlessly and finished right on schedule.',
     rating: 5,
     projectType: 'Terrace Patio & Custom Fireplace',
+  },
+  {
+    id: 't-4',
+    author: 'Dr. Gregory & Cynthia Hayes',
+    role: 'Private Residents',
+    location: 'Bernardsville, NJ',
+    quote: 'Our hillside had serious erosion issues with an old railroad tie wall falling over. Da Graca engineered a double-tier limestone gravity wall with built-in French drainage. It completely transformed our property into an architectural showpiece.',
+    rating: 5,
+    projectType: 'Engineered Hillside Retaining Walls',
+  },
+  {
+    id: 't-5',
+    author: 'David Thorne',
+    role: 'General Contractor',
+    location: 'Morristown, NJ',
+    quote: 'As a luxury custom builder, my trade partners define my reputation. I have subbed all my architectural stonework to Da Graca for 8 years. Their masonry team is prompt, reads prints effortlessly, and never cuts corners.',
+    rating: 5,
+    projectType: 'Custom Estate Masonry & Structural CMU',
+  },
+  {
+    id: 't-6',
+    author: 'Kathryn Pendelton',
+    role: 'Historical Society Trustee',
+    location: 'Flemington, NJ',
+    quote: 'Da Graca repaired our historic municipal chimney and crumbling brownstone foundation using authentic breathable lime mortars. Their devotion to historic integrity and building science is unmatched in New Jersey.',
+    rating: 5,
+    projectType: 'Historic Brownstone & Chimney Rebuild',
   },
 ];

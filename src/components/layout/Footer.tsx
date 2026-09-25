@@ -46,37 +46,37 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Architectural Stone Masonry</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Historic Brick & Tuckpointing</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Bluestone Patios & Terraces</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Engineered Retaining Walls</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Chimney & Fireplace Rebuilds</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
+                <Link to="/services" className="text-stone-600 hover:text-amber-800 transition-colors flex items-center justify-between group">
                   <span>Commercial Masonry & CMU</span>
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>

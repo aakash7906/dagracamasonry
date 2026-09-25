@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { Home } from '@/pages/Home';
-import { About } from '@/pages/About';
-import { Gallery } from '@/pages/Gallery';
-import { Contact } from '@/pages/Contact';
-import { NotFound } from '@/pages/NotFound';
+import { Home } from '@/pages/website/Home';
+import { About } from '@/pages/website/About';
+import { Services } from '@/pages/website/Services';
+import { Gallery } from '@/pages/website/Gallery';
+import { Testimonials } from '@/pages/website/Testimonials';
+import { Contact } from '@/pages/website/Contact';
+import { NotFound } from '@/pages/website/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -20,8 +22,16 @@ export const router = createBrowserRouter([
         element: <About />,
       },
       {
+        path: 'services',
+        element: <Services />,
+      },
+      {
         path: 'gallery',
         element: <Gallery />,
+      },
+      {
+        path: 'testimonials',
+        element: <Testimonials />,
       },
       {
         path: 'contact',
