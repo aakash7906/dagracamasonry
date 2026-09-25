@@ -4,6 +4,15 @@ export interface NavItem {
   isExternal?: boolean;
 }
 
+export type ProjectCategory =
+  | 'all'
+  | 'residential'
+  | 'commercial'
+  | 'restoration'
+  | 'hardscaping'
+  | 'fireplaces'
+  | 'walls';
+
 export interface ServiceItem {
   id: string;
   title: string;
@@ -24,6 +33,21 @@ export interface ProjectItem {
   completionYear: string;
   tags: string[];
   imageUrl: string;
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: 'residential' | 'commercial' | 'restoration' | 'hardscaping' | 'fireplaces' | 'walls';
+  categoryLabel: string;
+  description: string;
+  materials: string[];
+  dimensions?: string;
+  location: string;
+  completionYear: string;
+  imageUrl: string;
+  beforeImageUrl?: string;
+  featured?: boolean;
 }
 
 export interface TestimonialItem {

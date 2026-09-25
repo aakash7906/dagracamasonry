@@ -37,7 +37,7 @@ export function Header() {
             <span className="text-stone-400">Serving NJ, Eastern PA & NY Metro</span>
             <a
               href="tel:9085557866"
-              className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-semibold transition-colors"
+              className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-semibold transition-colors focus-visible:outline-none"
             >
               <Phone className="h-3 w-3" />
               <span>(908) 555-STONE</span>
@@ -56,7 +56,7 @@ export function Header() {
       >
         <Container className="flex items-center justify-between">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group focus-visible:outline-none">
             <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-stone-950 shadow-md group-hover:scale-105 transition-transform">
               <Hammer className="h-5 w-5 fill-stone-950 stroke-stone-950" />
             </div>
@@ -71,21 +71,36 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navigationLinks.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className="text-sm font-medium text-stone-300 hover:text-amber-400 transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3">
+            {navigationLinks.map((item) => {
+              const isActive =
+                item.href === '/'
+                  ? location.pathname === '/' && !location.hash
+                  : location.pathname === item.href ||
+                    (item.href.startsWith('/#') && location.hash === item.href.slice(1));
+
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`text-sm font-medium transition-all px-3 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
+                    isActive
+                      ? 'text-amber-400 bg-stone-800/90 shadow-sm font-semibold'
+                      : 'text-stone-300 hover:text-amber-400 hover:bg-stone-800/50'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Header Action Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <a href="tel:9085557866" className="text-stone-300 hover:text-white transition-colors text-sm font-semibold flex items-center gap-1.5">
+          <div className="hidden lg:flex items-center gap-4">
+            <a
+              href="tel:9085557866"
+              className="text-stone-300 hover:text-white transition-colors text-sm font-semibold flex items-center gap-1.5 focus-visible:outline-none"
+            >
               <Phone className="h-4 w-4 text-amber-500" />
               <span>(908) 555-7866</span>
             </a>
@@ -94,7 +109,11 @@ export function Header() {
               size="default"
               onClick={() => {
                 const el = document.getElementById('consultation');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.href = '/#consultation';
+                }
               }}
             >
               Get Free Estimate
@@ -102,7 +121,7 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <Button
               variant="ghost"
               size="icon"
@@ -124,20 +143,31 @@ export function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-stone-900 border-b border-stone-800 shadow-2xl px-6 py-6"
+            className="lg:hidden bg-stone-900 border-b border-stone-800 shadow-2xl px-6 py-6"
           >
-            <nav className="flex flex-col gap-4">
-              {navigationLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className="text-base font-medium text-stone-200 hover:text-amber-400 py-1 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4 border-t border-stone-800 flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
+              {navigationLinks.map((item) => {
+                const isActive =
+                  item.href === '/'
+                    ? location.pathname === '/'
+                    : location.pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
+                      isActive
+                        ? 'text-amber-400 bg-stone-800 font-semibold'
+                        : 'text-stone-200 hover:text-amber-400 hover:bg-stone-800/50'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+              <div className="pt-4 mt-2 border-t border-stone-800 flex flex-col gap-3">
                 <a
                   href="tel:9085557866"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-stone-800 text-stone-200 py-2.5 text-sm font-semibold"
@@ -150,7 +180,11 @@ export function Header() {
                   onClick={() => {
                     setMobileMenuOpen(false);
                     const el = document.getElementById('consultation');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      window.location.href = '/#consultation';
+                    }
                   }}
                 >
                   Get Free Estimate
