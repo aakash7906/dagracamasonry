@@ -8,17 +8,17 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-amber-600 text-white shadow hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600',
+          'bg-amber-600 text-white shadow-sm hover:bg-amber-700',
         destructive:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:
-          'border border-stone-300 bg-background shadow-sm hover:bg-stone-100 hover:text-stone-900 dark:border-stone-700 dark:hover:bg-stone-800 dark:hover:text-stone-100',
+          'border border-stone-300 bg-white text-stone-800 shadow-xs hover:bg-stone-100 hover:text-stone-900',
         secondary:
-          'bg-stone-100 text-stone-900 shadow-sm hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-100 dark:hover:bg-stone-700',
-        ghost: 'hover:bg-stone-100 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-100',
-        link: 'text-amber-600 underline-offset-4 hover:underline dark:text-amber-400',
+          'bg-stone-100 text-stone-900 shadow-xs hover:bg-stone-200',
+        ghost: 'hover:bg-stone-100 hover:text-stone-900',
+        link: 'text-amber-700 underline-offset-4 hover:underline',
         masonry:
-          'bg-stone-900 text-amber-400 border border-amber-500/30 hover:border-amber-500 hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/10 dark:bg-stone-950 dark:text-amber-400 dark:border-amber-500/40',
+          'bg-stone-900 text-white border border-stone-800 hover:bg-stone-800 hover:shadow-md',
       },
       size: {
         default: 'h-10 px-5 py-2.5',
