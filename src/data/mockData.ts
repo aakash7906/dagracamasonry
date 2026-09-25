@@ -7,6 +7,7 @@ export const navigationLinks: NavItem[] = [
   { label: 'Gallery', href: '/gallery' },
   { label: 'About Us', href: '/about' },
   { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export const companyStats: CompanyStat[] = [

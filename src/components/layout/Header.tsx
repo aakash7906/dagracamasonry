@@ -71,7 +71,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navigationLinks.map((item) => {
               const isActive =
                 item.href === '/'
@@ -83,7 +83,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`text-sm font-medium transition-all px-3 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
+                  className={`text-xs xl:text-sm font-medium transition-all px-2 xl:px-2.5 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 whitespace-nowrap ${
                     isActive
                       ? 'text-amber-400 bg-stone-800/90 shadow-sm font-semibold'
                       : 'text-stone-300 hover:text-amber-400 hover:bg-stone-800/50'

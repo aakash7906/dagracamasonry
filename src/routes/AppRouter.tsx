@@ -3,6 +3,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Home } from '@/pages/Home';
 import { About } from '@/pages/About';
 import { Gallery } from '@/pages/Gallery';
+import { Contact } from '@/pages/Contact';
 import { NotFound } from '@/pages/NotFound';
 
 export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: 'gallery',
         element: <Gallery />,
+      },
+      {
+        path: 'contact',
+        element: <Contact />,
       },
       {
         path: '*',
