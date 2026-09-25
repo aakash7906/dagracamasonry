@@ -1,0 +1,14 @@
+# Security headers for all routes
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Cache hashed assets indefinitely (1 year)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache icons & images
+/favicon.svg
+  Cache-Control: public, max-age=86400
