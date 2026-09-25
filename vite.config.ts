@@ -19,6 +19,11 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-radix': [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-select',
+            '@radix-ui/react-dropdown-menu',
+          ],
           'vendor-motion': ['motion'],
           'vendor-icons': ['lucide-react'],
         },
