@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
 import { Phone, Mail, CheckCircle2, Send, Calendar } from 'lucide-react';
 
 export function CTASection() {
@@ -25,7 +32,7 @@ export function CTASection() {
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <Container>
-        <div className="rounded-2xl sm:rounded-3xl bg-stone-100/80 border border-stone-200 p-5 sm:p-10 lg:p-16 shadow-xl relative z-10">
+        <div className="rounded-md bg-stone-100/80 border border-stone-200 p-5 sm:p-10 lg:p-16 shadow-xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column Information */}
             <div className="lg:col-span-6 space-y-5 sm:space-y-6">
@@ -79,7 +86,7 @@ export function CTASection() {
 
             {/* Right Column Interactive Form */}
             <div className="lg:col-span-6">
-              <div className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-md">
+              <div className="rounded-md bg-white border border-stone-200 p-6 sm:p-8 shadow-md">
                 {submitted ? (
                   <div className="text-center py-12 space-y-4">
                     <div className="h-16 w-16 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center mx-auto">
@@ -157,32 +164,40 @@ export function CTASection() {
                         <label className="block text-xs font-semibold text-stone-700 mb-1">
                           Primary Service
                         </label>
-                        <select
+                        <Select
                           value={formData.service}
-                          onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, service: val })}
                         >
-                          <option value="natural-stone">Natural Stone Masonry</option>
-                          <option value="brick-pointing">Historic Brick & Tuckpointing</option>
-                          <option value="patios-walkways">Bluestone Patio / Terrace</option>
-                          <option value="retaining-walls">Retaining Wall Construction</option>
-                          <option value="fireplaces-chimneys">Chimney & Fireplace Work</option>
-                          <option value="commercial">Commercial / Multi-Unit</option>
-                        </select>
+                          <SelectTrigger className="w-full h-10 rounded-lg">
+                            <SelectValue placeholder="Select service..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="natural-stone">Natural Stone Masonry</SelectItem>
+                            <SelectItem value="brick-pointing">Historic Brick & Tuckpointing</SelectItem>
+                            <SelectItem value="patios-walkways">Bluestone Patio / Terrace</SelectItem>
+                            <SelectItem value="retaining-walls">Retaining Wall Construction</SelectItem>
+                            <SelectItem value="fireplaces-chimneys">Chimney & Fireplace Work</SelectItem>
+                            <SelectItem value="commercial">Commercial / Multi-Unit</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <label className="block text-xs font-semibold text-stone-700 mb-1">
                           Estimated Timeline
                         </label>
-                        <select
+                        <Select
                           value={formData.timeline}
-                          onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                          className="w-full px-3.5 py-2.5 rounded-lg bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, timeline: val })}
                         >
-                          <option value="immediate">Immediate / Urgent Repair</option>
-                          <option value="1-3-months">Next 1–3 Months</option>
-                          <option value="planning">Future Season / Planning</option>
-                        </select>
+                          <SelectTrigger className="w-full h-10 rounded-lg">
+                            <SelectValue placeholder="Select timeline..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="immediate">Immediate / Urgent Repair</SelectItem>
+                            <SelectItem value="1-3-months">Next 1–3 Months</SelectItem>
+                            <SelectItem value="planning">Future Season / Planning</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 

@@ -12,7 +12,6 @@ import {
   Building2,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Phone,
   HardHat,
   Check,
@@ -70,13 +69,13 @@ export function Services() {
       {/* Header Banner */}
       <Container className="mb-14">
         <div className="max-w-3xl space-y-4">
-          <Badge
+          {/* <Badge
             variant="stone"
             className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
             Specialized Capabilities & Disciplines
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Architectural Masonry & Structural Stone Services
           </h1>
@@ -97,7 +96,7 @@ export function Services() {
         </div>
 
         {/* Quick Discipline Filter Pills */}
-        <div className="mt-8 sm:mt-10 p-4 sm:p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-wrap items-center gap-2">
+        <div className="mt-8 sm:mt-10 p-4 sm:p-5 rounded-md bg-white border border-stone-200 shadow-sm flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500 mr-2">
             Filter by Discipline:
           </span>
@@ -138,7 +137,7 @@ export function Services() {
             <div
               key={service.id}
               id={service.id}
-              className="rounded-3xl bg-white border border-stone-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="rounded-md bg-white border border-stone-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
               <div
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${
@@ -238,7 +237,7 @@ export function Services() {
 
       {/* 5-Step Craft Process Section */}
       <Container className="mb-20">
-        <div className="rounded-3xl bg-white border border-stone-200 p-6 sm:p-10 lg:p-16 shadow-lg space-y-12">
+        <div className="rounded-md bg-white border border-stone-200 p-6 sm:p-10 lg:p-16 shadow-lg space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge
               variant="stone"
@@ -258,7 +257,7 @@ export function Services() {
             {processSteps.map((p) => (
               <div
                 key={p.step}
-                className="p-5 rounded-2xl bg-stone-50 border border-stone-200 hover:border-amber-500/80 transition-all flex flex-col justify-between space-y-3"
+                className="p-5 rounded-md bg-stone-50 border border-stone-200 hover:border-amber-500/80 transition-all flex flex-col justify-between space-y-3"
               >
                 <div>
                   <span className="font-heading font-black text-2xl text-amber-600 block mb-2">
@@ -281,7 +280,7 @@ export function Services() {
 
       {/* Consultation Banner CTA */}
       <Container>
-        <div className="rounded-3xl bg-gradient-to-r from-amber-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-md bg-gradient-to-r from-amber-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
               Need a Custom Masonry Specification or Blueprint Review?

@@ -1,8 +1,21 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/Accordion';
 import {
   Phone,
   Mail,
@@ -14,9 +27,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   UploadCloud,
-  ChevronDown,
   Building,
-  Sparkles,
 } from 'lucide-react';
 
 interface ContactFormData {
@@ -72,7 +83,6 @@ const faqs = [
 export function Contact() {
   const [formData, setFormData] = useState<ContactFormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [dragActive, setDragActive] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -93,10 +103,10 @@ export function Contact() {
       {/* Header Banner */}
       <Container className="mb-14">
         <div className="max-w-3xl space-y-4">
-          <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
+          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
             Direct Communication & Free Estimates
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Connect With Our Master Stonemasons
           </h1>
@@ -119,7 +129,7 @@ export function Contact() {
         {/* Contact Cards Grid */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1: Direct Phone */}
-          <div className="p-6 rounded-2xl bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+          <div className="p-6 rounded-md bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <Phone className="h-6 w-6" />
@@ -145,7 +155,7 @@ export function Contact() {
           </div>
 
           {/* Card 2: Email Blueprints */}
-          <div className="p-6 rounded-2xl bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+          <div className="p-6 rounded-md bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <Mail className="h-6 w-6" />
@@ -171,7 +181,7 @@ export function Contact() {
           </div>
 
           {/* Card 3: Yard & Office */}
-          <div className="p-6 rounded-2xl bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+          <div className="p-6 rounded-md bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <MapPin className="h-6 w-6" />
@@ -192,7 +202,7 @@ export function Contact() {
           </div>
 
           {/* Card 4: Service Radius */}
-          <div className="p-6 rounded-2xl bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+          <div className="p-6 rounded-md bg-white border border-stone-200 hover:border-amber-500/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <ShieldCheck className="h-6 w-6" />
@@ -217,7 +227,7 @@ export function Contact() {
 
       {/* Main Form & Scope Section */}
       <Container className="mb-20">
-        <div className="rounded-3xl bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
+        <div className="rounded-md bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Info Column */}
             <div className="lg:col-span-5 space-y-6">
@@ -232,7 +242,7 @@ export function Contact() {
               </p>
 
               {/* What Happens Next Checklist */}
-              <div className="p-6 rounded-2xl bg-white border border-stone-200 space-y-4 shadow-sm">
+              <div className="p-6 rounded-md bg-white border border-stone-200 space-y-4 shadow-sm">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-amber-700">
                   What Happens Next?
                 </h4>
@@ -265,7 +275,7 @@ export function Contact() {
               </div>
 
               {/* Emergency Callout Box */}
-              <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-4">
+              <div className="p-5 rounded-md bg-amber-50 border border-amber-200 flex items-start gap-4">
                 <AlertTriangle className="h-6 w-6 text-amber-600 shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="text-sm font-bold text-amber-900">
@@ -286,7 +296,7 @@ export function Contact() {
 
             {/* Right Form Column */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl bg-white border border-stone-200 p-4 sm:p-8 lg:p-10 shadow-md">
+              <div className="rounded-md bg-white border border-stone-200 p-4 sm:p-8 lg:p-10 shadow-md">
                 {submitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -392,35 +402,43 @@ export function Contact() {
                         <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                           Primary Masonry Discipline <span className="text-amber-600">*</span>
                         </label>
-                        <select
+                        <Select
                           value={formData.serviceType}
-                          onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, serviceType: val })}
                         >
-                          <option value="natural-stone">Architectural Natural Stone Veneer</option>
-                          <option value="bluestone-patio">Pennsylvania Bluestone Patio / Terrace</option>
-                          <option value="brick-pointing">Historic Brick & Tuckpointing</option>
-                          <option value="retaining-wall">Engineered Retaining Wall</option>
-                          <option value="fireplace-chimney">Chimney Rebuilding / Hearth</option>
-                          <option value="commercial">Commercial Masonry / Multi-Unit</option>
-                          <option value="other">Other Bespoke Masonry</option>
-                        </select>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select discipline..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="natural-stone">Architectural Natural Stone Veneer</SelectItem>
+                            <SelectItem value="bluestone-patio">Pennsylvania Bluestone Patio / Terrace</SelectItem>
+                            <SelectItem value="brick-pointing">Historic Brick & Tuckpointing</SelectItem>
+                            <SelectItem value="retaining-wall">Engineered Retaining Wall</SelectItem>
+                            <SelectItem value="fireplace-chimney">Chimney Rebuilding / Hearth</SelectItem>
+                            <SelectItem value="commercial">Commercial Masonry / Multi-Unit</SelectItem>
+                            <SelectItem value="other">Other Bespoke Masonry</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                           Property Classification
                         </label>
-                        <select
+                        <Select
                           value={formData.propertyType}
-                          onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, propertyType: val })}
                         >
-                          <option value="residential">Single-Family Private Estate</option>
-                          <option value="historic">Historic Landmark / Pre-1930s Home</option>
-                          <option value="commercial">Commercial / Institutional Building</option>
-                          <option value="new-construction">Architectural New Construction</option>
-                        </select>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select property type..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="residential">Single-Family Private Estate</SelectItem>
+                            <SelectItem value="historic">Historic Landmark / Pre-1930s Home</SelectItem>
+                            <SelectItem value="commercial">Commercial / Institutional Building</SelectItem>
+                            <SelectItem value="new-construction">Architectural New Construction</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
@@ -430,33 +448,41 @@ export function Contact() {
                         <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                           Estimated Investment Range
                         </label>
-                        <select
+                        <Select
                           value={formData.budgetRange}
-                          onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, budgetRange: val })}
                         >
-                          <option value="under-15k">Under $15,000 (Repairs & Pointing)</option>
-                          <option value="$15k-$30k">$15,000 – $30,000 (Patios / Walkways)</option>
-                          <option value="$30k-$60k">$30,000 – $60,000 (Retaining Walls / Facades)</option>
-                          <option value="$60k-$120k">$60,000 – $120,000 (Full Estate Masonry)</option>
-                          <option value="$120k+">$120,000+ (Master Architectural Scope)</option>
-                        </select>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select investment range..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="under-15k">Under $15,000 (Repairs & Pointing)</SelectItem>
+                            <SelectItem value="$15k-$30k">$15,000 – $30,000 (Patios / Walkways)</SelectItem>
+                            <SelectItem value="$30k-$60k">$30,000 – $60,000 (Retaining Walls / Facades)</SelectItem>
+                            <SelectItem value="$60k-$120k">$60,000 – $120,000 (Full Estate Masonry)</SelectItem>
+                            <SelectItem value="$120k+">$120,000+ (Master Architectural Scope)</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                           Desired Completion Timeline
                         </label>
-                        <select
+                        <Select
                           value={formData.timeline}
-                          onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                          onValueChange={(val) => setFormData({ ...formData, timeline: val })}
                         >
-                          <option value="urgent">Immediate / Emergency Repair</option>
-                          <option value="1-3-months">Next 1–3 Months</option>
-                          <option value="3-6-months">Next 3–6 Months</option>
-                          <option value="planning">Future Season / Planning & Permits</option>
-                        </select>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select timeline..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="urgent">Immediate / Emergency Repair</SelectItem>
+                            <SelectItem value="1-3-months">Next 1–3 Months</SelectItem>
+                            <SelectItem value="3-6-months">Next 3–6 Months</SelectItem>
+                            <SelectItem value="planning">Future Season / Planning & Permits</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
@@ -531,17 +557,21 @@ export function Contact() {
                       <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                         How Did You Hear About Da Graca Masonry?
                       </label>
-                      <select
+                      <Select
                         value={formData.referralSource}
-                        onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                        onValueChange={(val) => setFormData({ ...formData, referralSource: val })}
                       >
-                        <option value="google">Google Search / Google Maps</option>
-                        <option value="architect">Architect or Landscape Designer Recommendation</option>
-                        <option value="neighbor">Saw Our Jobsite Sign / Neighbor Referral</option>
-                        <option value="word-of-mouth">Word of Mouth / Prior Client</option>
-                        <option value="social">Instagram / Social Media Portfolio</option>
-                      </select>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select referral source..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="google">Google Search / Google Maps</SelectItem>
+                          <SelectItem value="architect">Architect or Landscape Designer Recommendation</SelectItem>
+                          <SelectItem value="neighbor">Saw Our Jobsite Sign / Neighbor Referral</SelectItem>
+                          <SelectItem value="word-of-mouth">Word of Mouth / Prior Client</SelectItem>
+                          <SelectItem value="social">Instagram / Social Media Portfolio</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     {/* Submit Button */}
@@ -578,45 +608,18 @@ export function Contact() {
             </p>
           </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => {
-              const isOpen = activeFaq === idx;
-              return (
-                <div
-                  key={faq.q}
-                  className="rounded-2xl bg-white border border-stone-200 overflow-hidden shadow-xs transition-colors"
-                >
-                  <button
-                    onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4 hover:text-amber-700 transition-colors"
-                  >
-                    <span className="font-heading font-bold text-stone-900 text-base sm:text-lg">
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      className={`h-5 w-5 text-amber-600 shrink-0 transition-transform duration-300 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="px-6 pb-6 text-stone-600 text-sm leading-relaxed border-t border-stone-100 pt-4"
-                      >
-                        {faq.a}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
-          </div>
+          <Accordion type="single" collapsible defaultValue="item-0" className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <AccordionItem key={faq.q} value={`item-${idx}`}>
+                <AccordionTrigger>
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent>
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </Container>
     </div>

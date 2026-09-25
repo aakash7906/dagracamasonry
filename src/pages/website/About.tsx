@@ -1,5 +1,4 @@
 import { Container } from '@/components/ui/Container';
-import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { ShieldCheck, Award, HeartHandshake, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -10,9 +9,9 @@ export function About() {
       <Container>
         {/* Header */}
         <div className="max-w-3xl space-y-4 mb-16">
-          <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
+          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             Our Story & Heritage
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight">
             Crafting Stone Legacies for Over Two Decades
           </h1>
@@ -50,14 +49,14 @@ export function About() {
           </div>
 
           <div className="lg:col-span-6">
-            <div className="relative rounded-3xl overflow-hidden border border-stone-200 shadow-2xl bg-white">
+            <div className="relative rounded-md overflow-hidden border border-stone-200 shadow-2xl bg-white">
               <img
-                src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1200&q=80"
-                alt="Master mason laying precision brick and stone"
+                src="/images/masonry/craftsman-work.jpg"
+                alt="Master stone mason craftsman laying precision natural fieldstone with mortar"
                 className="w-full h-[320px] sm:h-[420px] lg:h-[480px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-stone-200 shadow-lg">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-6 rounded-md bg-white/95 backdrop-blur-md border border-stone-200 shadow-lg">
                 <div className="flex items-center gap-3">
                   <Award className="h-6 w-6 text-amber-600 shrink-0" />
                   <div>
@@ -71,7 +70,7 @@ export function About() {
         </div>
 
         {/* Guiding Principles */}
-        <div className="rounded-3xl bg-white border border-stone-200 p-5 sm:p-8 lg:p-12 mb-16 shadow-md">
+        <div className="rounded-md bg-white border border-stone-200 p-5 sm:p-8 lg:p-12 mb-16 shadow-md">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
             <h2 className="text-3xl font-extrabold text-stone-950 font-heading">
               Our Core Principles
@@ -82,7 +81,7 @@ export function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="space-y-3 p-6 rounded-2xl bg-stone-50 border border-stone-200">
+            <div className="space-y-3 p-6 rounded-md bg-stone-50 border border-stone-200">
               <div className="h-10 w-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
                 <ShieldCheck className="h-5 w-5" />
               </div>
@@ -92,7 +91,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="space-y-3 p-6 rounded-2xl bg-stone-50 border border-stone-200">
+            <div className="space-y-3 p-6 rounded-md bg-stone-50 border border-stone-200">
               <div className="h-10 w-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
                 <Award className="h-5 w-5" />
               </div>
@@ -102,7 +101,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="space-y-3 p-6 rounded-2xl bg-stone-50 border border-stone-200">
+            <div className="space-y-3 p-6 rounded-md bg-stone-50 border border-stone-200">
               <div className="h-10 w-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
                 <HeartHandshake className="h-5 w-5" />
               </div>

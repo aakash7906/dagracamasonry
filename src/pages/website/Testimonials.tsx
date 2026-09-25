@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Award,
   ArrowRight,
-  Sparkles,
   MapPin,
   HeartHandshake,
   MessageSquare,
@@ -39,13 +38,13 @@ export function Testimonials() {
       {/* Header Banner */}
       <Container className="mb-14">
         <div className="max-w-3xl space-y-4">
-          <Badge
+          {/* <Badge
             variant="stone"
             className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
             Client Trust & Reputation
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Reputation Carved in Stone
           </h1>
@@ -70,7 +69,7 @@ export function Testimonials() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-sm space-y-1 hover:border-amber-400 transition-colors"
+              className="p-5 sm:p-6 rounded-md bg-white border border-stone-200 shadow-sm space-y-1 hover:border-amber-400 transition-colors"
             >
               <span className="text-2xl sm:text-3xl font-extrabold font-heading text-amber-700 block">
                 {s.value}
@@ -82,7 +81,7 @@ export function Testimonials() {
         </div>
 
         {/* Filter Pills */}
-        <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-wrap items-center gap-2">
+        <div className="mt-8 p-4 sm:p-5 rounded-md bg-white border border-stone-200 shadow-sm flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-stone-500 mr-2">
             Filter by Scope:
           </span>
@@ -155,7 +154,7 @@ export function Testimonials() {
           {filteredTestimonials.map((item) => (
             <div
               key={item.id}
-              className="rounded-3xl border border-stone-200 bg-white text-stone-900 shadow-md flex flex-col justify-between hover:border-amber-500 hover:shadow-xl transition-all p-6 sm:p-8 relative group"
+              className="rounded-md border border-stone-200 bg-white text-stone-900 shadow-md flex flex-col justify-between hover:border-amber-500 hover:shadow-xl transition-all p-6 sm:p-8 relative group"
             >
               <Quote className="absolute top-6 right-6 h-8 w-8 text-stone-200 group-hover:text-amber-500/30 transition-colors" />
 
@@ -203,7 +202,7 @@ export function Testimonials() {
 
       {/* Trust & Guarantee Banner */}
       <Container className="mb-20">
-        <div className="rounded-3xl bg-white border border-stone-200 p-8 sm:p-12 shadow-md">
+        <div className="rounded-md bg-white border border-stone-200 p-8 sm:p-12 shadow-md">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div className="space-y-2">
               <div className="h-10 w-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mx-auto md:mx-0">
@@ -246,7 +245,7 @@ export function Testimonials() {
 
       {/* Consultation Banner CTA */}
       <Container>
-        <div className="rounded-3xl bg-gradient-to-r from-stone-900 to-stone-950 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-md bg-gradient-to-r from-stone-900 to-stone-950 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
               Ready to Discuss Your Project with Our Team?

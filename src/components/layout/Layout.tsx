@@ -18,7 +18,7 @@ export function Layout() {
   }, [pathname, hash]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-stone-50 text-stone-900 selection:bg-amber-500/20 selection:text-amber-950 font-sans antialiased">
+    <div className="flex min-h-screen flex-col bg-[#F4F0E8] text-stone-900 selection:bg-amber-500/20 selection:text-amber-950 font-sans antialiased">
       <Header />
       <main className="flex-1">
         <Outlet />

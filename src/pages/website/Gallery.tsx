@@ -8,13 +8,11 @@ import { Button } from '@/components/ui/Button';
 import {
   MapPin,
   Calendar,
-  Sparkles,
   Search,
   X,
   ArrowRight,
   Maximize2,
   Layers,
-  Ruler,
   CheckCircle2,
   SplitSquareVertical,
   ShieldCheck,
@@ -90,10 +88,10 @@ export function Gallery() {
       {/* Header Banner */}
       <Container className="mb-14">
         <div className="max-w-3xl space-y-4">
-          <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
+          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
             Master Craftsman Portfolio
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Our Work Carved in Stone
           </h1>
@@ -114,7 +112,7 @@ export function Gallery() {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="mt-8 sm:mt-10 p-4 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-md space-y-5 sm:space-y-6">
+        <div className="mt-8 sm:mt-10 p-4 sm:p-6 rounded-md bg-white border border-stone-200 shadow-md space-y-5 sm:space-y-6">
           {/* Search and Category tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             {/* Search Input */}
@@ -196,7 +194,7 @@ export function Gallery() {
       {/* Projects Grid */}
       <Container>
         {filteredProjects.length === 0 ? (
-          <div className="py-20 text-center rounded-2xl bg-white border border-stone-200 space-y-4 shadow-sm">
+          <div className="py-20 text-center rounded-md bg-white border border-stone-200 space-y-4 shadow-sm">
             <Layers className="h-12 w-12 text-stone-400 mx-auto" />
             <h3 className="text-xl font-bold font-heading text-stone-900">
               No Masonry Projects Matched Your Search
@@ -234,11 +232,11 @@ export function Gallery() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35 }}
-                    className="group rounded-2xl overflow-hidden bg-white border border-stone-200 hover:border-amber-500/80 shadow-md hover:shadow-xl hover:shadow-stone-200/80 transition-all duration-300 flex flex-col cursor-pointer"
+                    className="group rounded-md overflow-hidden bg-white border border-stone-200 hover:border-amber-500/80 shadow-md hover:shadow-xl hover:shadow-stone-200/80 transition-all duration-300 flex flex-col cursor-pointer"
                     onClick={() => openModal(project)}
                   >
                     {/* Image Container */}
-                    <div className="relative h-64 w-full overflow-hidden bg-stone-200">
+                    <div className="relative h-80 sm:h-[360px] lg:h-[400px] w-full overflow-hidden bg-stone-200">
                       <img
                         src={currentImg}
                         alt={project.title}
@@ -275,48 +273,25 @@ export function Gallery() {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-4 text-xs text-stone-500">
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3 text-amber-600" />
-                            {project.location}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3 text-amber-600" />
-                            {project.completionYear}
-                          </span>
-                        </div>
-
-                        <h3 className="text-xl font-heading font-bold text-stone-900 group-hover:text-amber-700 transition-colors">
-                          {project.title}
-                        </h3>
-
-                        <p className="text-sm text-stone-600 leading-relaxed line-clamp-2">
-                          {project.description}
-                        </p>
+                    <div className="p-6 flex-1 flex flex-col space-y-2">
+                      <div className="flex items-center gap-4 text-xs text-stone-500">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-amber-600" />
+                          {project.location}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3 text-amber-600" />
+                          {project.completionYear}
+                        </span>
                       </div>
 
-                      {/* Specs and Materials */}
-                      <div className="space-y-3 pt-3 border-t border-stone-100">
-                        {project.dimensions && (
-                          <div className="flex items-center gap-1.5 text-xs text-stone-700 font-medium">
-                            <Ruler className="h-3.5 w-3.5 text-amber-600 shrink-0" />
-                            <span>{project.dimensions}</span>
-                          </div>
-                        )}
+                      <h3 className="text-xl font-heading font-bold text-stone-900 group-hover:text-amber-700 transition-colors">
+                        {project.title}
+                      </h3>
 
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.materials.map((mat) => (
-                            <span
-                              key={mat}
-                              className="text-[11px] px-2.5 py-0.5 rounded-md bg-stone-100 border border-stone-200 text-stone-700 font-medium"
-                            >
-                              {mat}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                      <p className="text-sm text-stone-600 leading-relaxed line-clamp-2">
+                        {project.description}
+                      </p>
                     </div>
                   </motion.div>
                 );
@@ -345,7 +320,7 @@ export function Gallery() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-4xl bg-white border border-stone-200 rounded-3xl shadow-2xl overflow-hidden z-10 my-8 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-white border border-stone-200 rounded-md shadow-2xl overflow-hidden z-10 my-8 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header Bar */}
               <div className="p-4 sm:p-6 bg-stone-50 border-b border-stone-200 flex items-start sm:items-center justify-between gap-4">
@@ -369,7 +344,7 @@ export function Gallery() {
               {/* Modal Body (Scrollable) */}
               <div className="overflow-y-auto p-4 sm:p-8 space-y-5 sm:space-y-6">
                 {/* Photo Viewer */}
-                <div className="relative rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 h-[260px] sm:h-[400px] lg:h-[440px]">
+                <div className="relative rounded-md overflow-hidden bg-stone-100 border border-stone-200 h-[260px] sm:h-[400px] lg:h-[440px]">
                   <img
                     src={
                       showModalBefore && activeModalProject.beforeImageUrl
@@ -492,7 +467,7 @@ export function Gallery() {
 
       {/* Bottom Consultation Banner */}
       <Container className="mt-20">
-        <div className="rounded-3xl bg-white border border-stone-200 p-8 sm:p-12 text-center space-y-6 shadow-md">
+        <div className="rounded-md bg-white border border-stone-200 p-8 sm:p-12 text-center space-y-6 shadow-md">
           <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             Ready to Build Your Stone Legacy?
           </Badge>

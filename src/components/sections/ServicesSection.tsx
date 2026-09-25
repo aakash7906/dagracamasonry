@@ -1,99 +1,129 @@
-import { servicesData } from '@/data/mockData';
 import { Container } from '@/components/ui/Container';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { Gem, Layers, Compass, Flame, ShieldCheck, Building2, CheckCircle2, ArrowRight } from 'lucide-react';
-import type { JSX } from 'react';
+import {
+  Compass,
+  ShieldCheck,
+  Building,
+  Flame,
+  Layers,
+  Droplets,
+  Check,
+  ArrowRight,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const iconMap: Record<string, JSX.Element> = {
-  Gem: <Gem className="h-6 w-6 text-amber-600" />,
-  Layers: <Layers className="h-6 w-6 text-amber-600" />,
-  Compass: <Compass className="h-6 w-6 text-amber-600" />,
-  Flame: <Flame className="h-6 w-6 text-amber-600" />,
-  ShieldCheck: <ShieldCheck className="h-6 w-6 text-amber-600" />,
-  Building2: <Building2 className="h-6 w-6 text-amber-600" />,
-};
+const solutions = [
+  {
+    icon: <Compass className="h-6 w-6 text-[#b45309]" />,
+    title: 'Patios & Walkways',
+    description:
+      'Pennsylvania bluestone, thermal finishes, interlocking pavers, sitting walls, and integrated hidden drainage foundations.',
+    points: ['Custom sitting walls & fire tables', 'Zero-puddle grade leveling'],
+    link: '/services',
+  },
+  {
+    icon: <ShieldCheck className="h-6 w-6 text-[#b45309]" />,
+    title: 'Retaining Walls',
+    description:
+      'Heavy-duty engineered gravity stone walls, tiered hillside retention, and structural erosion barrier solutions.',
+    points: ['Geogrid reinforced foundations', 'Integrated weeping drainage lines'],
+    link: '/services',
+  },
+  {
+    icon: <Building className="h-6 w-6 text-[#b45309]" />,
+    title: 'Steps & Front Stoops',
+    description:
+      'Grand natural stone entryways, curved granite steps, custom porticos, and code-compliant stone landings.',
+    points: ['Deep frost-line concrete footings', 'Non-slip thermal bluestone treads'],
+    link: '/services',
+  },
+  {
+    icon: <Flame className="h-6 w-6 text-[#b45309]" />,
+    title: 'Exterior Veneers & Fireplaces',
+    description:
+      'Full-bed and thin natural stone veneers, custom outdoor kitchens, Rumford fireboxes, and hand-carved mantels.',
+    points: ['High-temp refractory fireboxes', 'Hand-split fieldstone & granite'],
+    link: '/services',
+  },
+  {
+    icon: <Layers className="h-6 w-6 text-[#b45309]" />,
+    title: 'Chimneys & Brick Repair',
+    description:
+      'Complete chimney rebuilds from roofline up, historic lime mortar tuckpointing, and custom poured concrete crowns.',
+    points: ['Code 4 milled lead counter-flashing', 'Authentic lime-mortar matching'],
+    link: '/services',
+  },
+  {
+    icon: <Droplets className="h-6 w-6 text-[#b45309]" />,
+    title: 'Basement Waterproofing',
+    description:
+      'Foundation stone repointing, structural crack injections, exterior French drains, and hydrostatic moisture mitigation.',
+    points: ['Structural foundation stabilization', 'Breathable damp-proof barriers'],
+    link: '/services',
+  },
+];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-14 sm:py-24 bg-white border-b border-stone-200">
-      <Container>
+    <section id="services" className="py-14 sm:py-20 lg:py-24 bg-white border-b border-[#E5E0D5]">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-4">
-          <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
-            Specialized Capabilities
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight">
-            Our Masonry Disciplines
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+          <div className="flex items-center justify-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#b45309]" />
+            <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#b45309]">
+              Specialized Disciplines
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
+            Complete Masonry Solutions
           </h2>
-          <p className="text-stone-600 text-base sm:text-lg">
-            Every stone is individually shaped, set, and inspected. We fuse traditional European masonry heritage with modern structural engineering standards.
+          <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            Every project is built with durable, code-exceeding footings, quarried natural stone, and weather-resistant breathable mortars to guarantee life-long structural endurance.
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* 6 Grid Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {servicesData.map((service) => (
-            <Card
-              key={service.id}
-              className="flex flex-col justify-between border-stone-200 bg-white hover:border-amber-500 hover:shadow-xl hover:shadow-stone-200/80 shadow-md transition-all duration-300 overflow-hidden group"
+          {solutions.map((item) => (
+            <div
+              key={item.title}
+              className="p-6 sm:p-7 rounded-md bg-white border border-stone-200 hover:border-amber-400 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between space-y-5 group"
             >
-              {/* Service image preview */}
-              <div className="relative h-52 w-full overflow-hidden bg-stone-100">
-                <img
-                  src={service.imageUrl}
-                  alt={service.title}
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute top-4 left-4 h-12 w-12 rounded-lg bg-white/95 backdrop-blur-md border border-stone-200 flex items-center justify-center shadow-md">
-                  {iconMap[service.iconName] || <Gem className="h-6 w-6 text-amber-600" />}
+              <div className="space-y-4">
+                {/* Icon box in light amber */}
+                <div className="h-12 w-12 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  {item.icon}
                 </div>
-                {service.popular && (
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="default" className="bg-amber-600 text-white text-[11px] font-bold shadow-sm">
-                      Signature Craft
-                    </Badge>
-                  </div>
-                )}
+
+                <h3 className="font-heading font-bold text-xl text-stone-900 group-hover:text-[#b45309] transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
 
-              <CardHeader className="pb-3 pt-5">
-                <CardTitle className="text-xl text-stone-900 group-hover:text-amber-700 transition-colors">
-                  {service.title}
-                </CardTitle>
-                <CardDescription className="text-stone-600 text-sm mt-2 leading-relaxed">
-                  {service.shortDescription}
-                </CardDescription>
-              </CardHeader>
+              {/* Bullet Points */}
+              <div className="space-y-2 pt-4 border-t border-stone-100 text-xs text-stone-700">
+                {item.points.map((pt) => (
+                  <div key={pt} className="flex items-center gap-2">
+                    <Check className="h-3.5 w-3.5 text-[#b45309] shrink-0" />
+                    <span>{pt}</span>
+                  </div>
+                ))}
 
-              <CardContent className="pt-0 space-y-4">
-                <ul className="space-y-2 text-xs text-stone-700">
-                  {service.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-amber-600 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="pt-4 border-t border-stone-100">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-full justify-between text-amber-700 hover:text-amber-800 hover:bg-amber-50 font-semibold text-xs"
-                    onClick={() => {
-                      const el = document.getElementById('consultation');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                <div className="pt-3">
+                  <Link
+                    to={item.link}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#b45309] hover:text-[#9a3412] transition-colors"
                   >
-                    <span>Consult on this Service</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
+                    <span>Learn More Details</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </Container>

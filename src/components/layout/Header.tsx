@@ -28,7 +28,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* Top emergency / quick contact bar */}
       <div className="bg-stone-900 text-stone-200 text-xs py-2 border-b border-stone-800">
-        <Container className="flex items-center justify-between gap-2">
+        <Container size="full" className="max-w-[1600px] flex items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex items-center gap-2 min-w-0">
             <ShieldCheck className="h-3.5 w-3.5 text-amber-400 shrink-0" />
             <span className="font-medium text-stone-200 text-[11px] sm:text-xs truncate">
@@ -57,24 +57,24 @@ export function Header() {
             : 'bg-white/90 border-b border-stone-200/80 py-3.5 sm:py-4'
         }`}
       >
-        <Container className="flex items-center justify-between">
+        <Container size="full" className="max-w-[1600px] flex items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
           {/* Brand Logo */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none shrink-0">
-            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-[#b45309] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
               <Hammer className="h-4 w-4 sm:h-5 sm:w-5 fill-white stroke-white" />
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-stone-950 group-hover:text-amber-700 transition-colors leading-tight">
+              <span className="font-heading font-extrabold text-lg sm:text-xl tracking-tight text-stone-950 group-hover:text-[#b45309] transition-colors leading-tight">
                 DA GRACA
               </span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-amber-700 font-bold -mt-0.5">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#b45309] font-bold -mt-0.5">
                 Masonry & Stone
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-5">
             {navigationLinks.map((item) => {
               const isActive =
                 item.href === '/'
@@ -86,10 +86,10 @@ export function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`text-xs xl:text-sm font-medium transition-all px-2.5 xl:px-3 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 whitespace-nowrap ${
+                  className={`text-xs xl:text-sm font-medium transition-all px-3 xl:px-3.5 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 whitespace-nowrap ${
                     isActive
                       ? 'text-amber-900 bg-amber-100/80 border border-amber-200/70 shadow-xs font-semibold'
-                      : 'text-stone-700 hover:text-amber-700 hover:bg-stone-100'
+                      : 'text-stone-700 hover:text-[#b45309] hover:bg-stone-100'
                   }`}
                 >
                   {item.label}
@@ -99,18 +99,18 @@ export function Header() {
           </nav>
 
           {/* Header Action Button */}
-          <div className="hidden lg:flex items-center gap-4 shrink-0">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0">
             <a
               href="tel:9085557866"
               className="text-stone-700 hover:text-stone-950 transition-colors text-sm font-semibold flex items-center gap-1.5 focus-visible:outline-none whitespace-nowrap"
             >
-              <Phone className="h-4 w-4 text-amber-600" />
+              <Phone className="h-4 w-4 text-[#b45309]" />
               <span>(908) 555-7866</span>
             </a>
             <Button
               variant="default"
               size="default"
-              className="bg-amber-600 hover:bg-amber-700 text-white font-semibold shadow-sm text-xs xl:text-sm"
+              className="bg-[#b45309] hover:bg-[#9a3412] text-white font-bold shadow-sm text-xs xl:text-sm rounded-lg px-4 sm:px-5"
               onClick={() => {
                 const el = document.getElementById('consultation');
                 if (el) {
