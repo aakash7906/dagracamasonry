@@ -13,8 +13,19 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#F4F0E8] py-12 sm:py-16 lg:py-20 border-b border-[#E5E0D5]">
-      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
+    <section className="relative overflow-hidden py-14 sm:py-18 lg:py-22 flex items-center border-b border-[#E5E0D5] bg-[#F4F0E8]">
+      {/* Background Stone Texture Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <img
+          src="/images/masonry/samplework6.png"
+          alt=""
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Ultra-subtle overlay allowing rich natural stone texture to shine */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/40 via-[#FAF8F5]/20 to-transparent" />
+      </div>
+
+      <Container size="full" className="relative z-10 max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Copy & CTAs */}
           <motion.div
@@ -41,7 +52,7 @@ export function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-stone-600 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-stone-800 font-medium max-w-2xl leading-relaxed">
               At Da Graca Masonry, we help homeowners, architects, and general contractors build and restore breathtaking natural stone facades, Pennsylvania bluestone patios, and structural brickwork with over three decades of field expertise.
             </p>
 
@@ -82,7 +93,7 @@ export function Hero() {
                 <img
                   src="/images/masonry/hero-patio.jpg"
                   alt="Custom Interlocking Pavers Patio & Outdoor Stone Kitchen by Da Graca Masonry"
-                  className="w-full h-[360px] sm:h-[460px] object-cover object-center"
+                  className="w-full h-[360px] sm:h-[430px] lg:h-[480px] object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 via-transparent to-transparent pointer-events-none" />
               </div>
