@@ -27,9 +27,9 @@ const pillars = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-24 bg-white border-b border-stone-200">
+    <section className="py-14 sm:py-24 bg-white border-b border-stone-200">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <div className="lg:col-span-5 space-y-6">
             <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
               The Da Graca Standard
@@ -56,11 +56,11 @@ export function WhyChooseUs() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {pillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="p-6 rounded-2xl bg-stone-50 border border-stone-200 hover:border-amber-500/80 hover:bg-white hover:shadow-lg transition-all space-y-3"
+                className="p-5 sm:p-6 rounded-2xl bg-stone-50 border border-stone-200 hover:border-amber-500/80 hover:bg-white hover:shadow-lg transition-all space-y-3"
               >
                 <div className="h-12 w-12 rounded-xl bg-amber-100/70 flex items-center justify-center border border-amber-200">
                   {pillar.icon}

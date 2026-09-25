@@ -16,7 +16,7 @@ export function PortfolioSection() {
     : portfolioProjects.filter((p) => p.category === filter);
 
   return (
-    <section id="portfolio" className="py-24 bg-stone-100/70 border-b border-stone-200">
+    <section id="portfolio" className="py-14 sm:py-24 bg-stone-100/70 border-b border-stone-200">
       <Container>
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
@@ -61,7 +61,7 @@ export function PortfolioSection() {
         {/* Projects Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence>
             {filteredProjects.map((project) => (
@@ -75,7 +75,7 @@ export function PortfolioSection() {
                 className="group rounded-2xl overflow-hidden bg-white border border-stone-200 hover:border-amber-500/80 shadow-md hover:shadow-xl hover:shadow-stone-200/80 transition-all duration-300 flex flex-col"
               >
                 {/* Image */}
-                <div className="relative h-60 w-full overflow-hidden bg-stone-200">
+                <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-stone-200">
                   <img
                     src={project.imageUrl}
                     alt={project.title}
@@ -90,7 +90,7 @@ export function PortfolioSection() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
                     <div className="flex items-center gap-4 text-xs text-stone-500 mb-2">
                       <span className="flex items-center gap-1">

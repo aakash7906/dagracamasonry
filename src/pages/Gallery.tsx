@@ -114,18 +114,18 @@ export function Gallery() {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="mt-10 p-6 rounded-2xl bg-white border border-stone-200 shadow-md space-y-6">
+        <div className="mt-8 sm:mt-10 p-4 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-md space-y-5 sm:space-y-6">
           {/* Search and Category tabs */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             {/* Search Input */}
-            <div className="relative w-full md:w-80">
+            <div className="relative w-full sm:w-80">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
               <input
                 type="text"
                 placeholder="Search stone, city, or feature..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                className="w-full pl-10 pr-8 py-2.5 rounded-xl bg-stone-50 border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
               />
               {searchQuery && (
                 <button
@@ -348,28 +348,28 @@ export function Gallery() {
               className="relative w-full max-w-4xl bg-white border border-stone-200 rounded-3xl shadow-2xl overflow-hidden z-10 my-8 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header Bar */}
-              <div className="p-4 sm:p-6 bg-stone-50 border-b border-stone-200 flex items-center justify-between">
-                <div>
+              <div className="p-4 sm:p-6 bg-stone-50 border-b border-stone-200 flex items-start sm:items-center justify-between gap-4">
+                <div className="pr-2">
                   <Badge variant="stone" className="text-xs mb-1 bg-amber-100 text-amber-950 border-amber-300">
                     {activeModalProject.categoryLabel}
                   </Badge>
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-stone-900">
+                  <h3 className="text-lg sm:text-2xl font-heading font-bold text-stone-900 leading-snug">
                     {activeModalProject.title}
                   </h3>
                 </div>
 
                 <button
                   onClick={() => setActiveModalProject(null)}
-                  className="h-10 w-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 hover:text-stone-900 flex items-center justify-center border border-stone-200 transition-colors"
+                  className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 hover:text-stone-900 flex items-center justify-center border border-stone-200 transition-colors shrink-0"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
 
               {/* Modal Body (Scrollable) */}
-              <div className="overflow-y-auto p-6 sm:p-8 space-y-6">
+              <div className="overflow-y-auto p-4 sm:p-8 space-y-5 sm:space-y-6">
                 {/* Photo Viewer */}
-                <div className="relative rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 h-[340px] sm:h-[440px]">
+                <div className="relative rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 h-[260px] sm:h-[400px] lg:h-[440px]">
                   <img
                     src={
                       showModalBefore && activeModalProject.beforeImageUrl

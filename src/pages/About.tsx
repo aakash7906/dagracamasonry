@@ -54,14 +54,14 @@ export function About() {
               <img
                 src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1200&q=80"
                 alt="Master mason laying precision brick and stone"
-                className="w-full h-[480px] object-cover"
+                className="w-full h-[320px] sm:h-[420px] lg:h-[480px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-stone-200 shadow-lg">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-stone-200 shadow-lg">
                 <div className="flex items-center gap-3">
                   <Award className="h-6 w-6 text-amber-600 shrink-0" />
                   <div>
-                    <h4 className="font-heading font-bold text-stone-900 text-base">Certified Historical Masonry</h4>
+                    <h4 className="font-heading font-bold text-stone-900 text-sm sm:text-base">Certified Historical Masonry</h4>
                     <p className="text-xs text-stone-500">Trained in non-destructive lime pointing & terra cotta repairs</p>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export function About() {
         </div>
 
         {/* Guiding Principles */}
-        <div className="rounded-3xl bg-white border border-stone-200 p-8 sm:p-12 mb-16 shadow-md">
+        <div className="rounded-3xl bg-white border border-stone-200 p-5 sm:p-8 lg:p-12 mb-16 shadow-md">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
             <h2 className="text-3xl font-extrabold text-stone-950 font-heading">
               Our Core Principles

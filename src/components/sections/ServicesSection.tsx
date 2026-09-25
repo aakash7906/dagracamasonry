@@ -17,10 +17,10 @@ const iconMap: Record<string, JSX.Element> = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-24 bg-white border-b border-stone-200">
+    <section id="services" className="py-14 sm:py-24 bg-white border-b border-stone-200">
       <Container>
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-4">
           <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             Specialized Capabilities
           </Badge>
@@ -33,7 +33,7 @@ export function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {servicesData.map((service) => (
             <Card
               key={service.id}

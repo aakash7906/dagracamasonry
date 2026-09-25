@@ -21,18 +21,18 @@ export function CTASection() {
   };
 
   return (
-    <section id="consultation" className="py-24 bg-white border-b border-stone-200 relative overflow-hidden">
+    <section id="consultation" className="py-14 sm:py-24 bg-white border-b border-stone-200 relative overflow-hidden">
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <Container>
-        <div className="rounded-3xl bg-stone-100/80 border border-stone-200 p-8 sm:p-12 lg:p-16 shadow-xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="rounded-2xl sm:rounded-3xl bg-stone-100/80 border border-stone-200 p-5 sm:p-10 lg:p-16 shadow-xl relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column Information */}
-            <div className="lg:col-span-6 space-y-6">
+            <div className="lg:col-span-6 space-y-5 sm:space-y-6">
               <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
                 Schedule a Consultation
               </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
                 Ready to Bring Enduring Stone Artistry to Your Property?
               </h2>
               <p className="text-stone-600 leading-relaxed">

@@ -217,14 +217,14 @@ export function Contact() {
 
       {/* Main Form & Scope Section */}
       <Container className="mb-20">
-        <div className="rounded-3xl bg-stone-100/80 border border-stone-200 p-8 sm:p-12 lg:p-16 shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="rounded-3xl bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Info Column */}
             <div className="lg:col-span-5 space-y-6">
               <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
                 Comprehensive Estimate
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
                 Request Your On-Site Masonry Proposal
               </h2>
               <p className="text-stone-600 text-sm leading-relaxed">
@@ -286,7 +286,7 @@ export function Contact() {
 
             {/* Right Form Column */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-10 shadow-md">
+              <div className="rounded-2xl bg-white border border-stone-200 p-4 sm:p-8 lg:p-10 shadow-md">
                 {submitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
