@@ -6,7 +6,6 @@ import {
   ChevronDown,
   ArrowRight,
   SendHorizontal,
-  Clock,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -218,7 +217,7 @@ export function AIChatbot() {
     const paragraphs = text.split('\n\n');
 
     return (
-      <div className="space-y-1.5 text-stone-800 text-[12.5px] leading-relaxed">
+      <div className="space-y-1.5 text-gray-800 text-[12.5px] leading-relaxed">
         {paragraphs.map((p, pIdx) => {
           if (p.includes('\n•') || p.startsWith('•')) {
             const lines = p.split('\n');
@@ -229,7 +228,7 @@ export function AIChatbot() {
                   if (!cleaned) return null;
                   return (
                     <li key={lIdx} className="flex items-start gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#B45309] mt-1.5 shrink-0" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-stone-700 mt-1.5 shrink-0" />
                       <span>{renderInlineMarkdown(cleaned)}</span>
                     </li>
                   );
@@ -254,7 +253,7 @@ export function AIChatbot() {
     return parts.map((part, index) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return (
-          <strong key={index} className="font-semibold text-stone-950">
+          <strong key={index} className="font-semibold text-gray-950">
             {part.slice(2, -2)}
           </strong>
         );
@@ -273,14 +272,25 @@ export function AIChatbot() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: 'spring', damping: 20, stiffness: 280 }}
-            className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50"
+            className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 flex items-center gap-2.5"
           >
+            {/* Discovery Pill Label on Desktop */}
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.3 }}
+              onClick={() => setIsOpen(true)}
+              className="hidden md:flex items-center px-3.5 py-1.5 bg-white/95 backdrop-blur-md text-gray-800 text-xs font-semibold rounded-full border border-purple-200/90 shadow-xl shadow-purple-950/10 cursor-pointer hover:bg-white hover:border-[#7C3AED] hover:text-black hover:scale-105 active:scale-95 transition-all select-none"
+            >
+              <span>Ask Stone Concierge</span>
+            </motion.div>
+
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open AI Concierge Chatbot"
-              className="relative w-[54px] h-[54px] sm:w-[58px] sm:h-[58px] rounded-full bg-[#1E362F] flex items-center justify-center shadow-xl shadow-stone-900/35 border-2 border-[#D6C4B2] ring-3 ring-[#E8DFD5] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[#B45309]"
+              className="relative w-[54px] h-[54px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-tr from-[#7C3AED] via-[#6D28D9] to-[#8B5CF6] flex items-center justify-center shadow-xl shadow-purple-600/30 border-2 border-white ring-4 ring-purple-100 hover:ring-purple-200 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-400"
             >
-              {/* Chat Bubble Icon with Copper Dot as shown in template image */}
+              {/* Chat Bubble Icon with Dot matching template */}
               <div className="relative">
                 <svg
                   className="w-6 h-6 sm:w-[26px] sm:h-[26px] text-white transition-transform group-hover:scale-105"
@@ -294,13 +304,13 @@ export function AIChatbot() {
                   <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
                 </svg>
 
-                {/* Copper / Terracotta Notification Dot in Top Right */}
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#C47D52] rounded-full border-2 border-[#1E362F] shadow-xs" />
+                {/* Notification Dot in Top Right */}
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full border-2 border-white shadow-xs" />
               </div>
 
               {/* Pulsing ring effect for subtle discovery */}
               {hasUnread && (
-                <span className="absolute inset-0 rounded-full border-2 border-[#C47D52] animate-ping opacity-30 pointer-events-none" />
+                <span className="absolute inset-0 rounded-full border-2 border-purple-400 animate-ping opacity-35 pointer-events-none" />
               )}
             </button>
           </motion.div>
@@ -315,39 +325,41 @@ export function AIChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 25, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 w-[calc(100vw-1.25rem)] sm:w-[355px] md:w-[365px] h-[78vh] sm:h-[530px] max-h-[560px] rounded-[22px] overflow-hidden shadow-2xl border border-stone-300/80 flex flex-col bg-[#F9F7F4] font-sans"
+            className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 w-[calc(100vw-1.25rem)] sm:w-[365px] h-[78vh] sm:h-[535px] max-h-[570px] rounded-[22px] overflow-hidden shadow-2xl border border-gray-200/90 flex flex-col bg-white font-sans"
             style={{
               boxShadow:
-                '0 20px 45px -10px rgba(18, 30, 26, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                '0 20px 45px -10px rgba(124, 58, 237, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.05)',
             }}
           >
-            {/* Header: Dark Green with Avatar, Name, Reset & Chevron Down */}
-            <div className="bg-[#1E362F] text-white px-3.5 py-2.5 sm:px-4 sm:py-2.5 flex items-center justify-between shrink-0 shadow-md">
+            {/* Header: Clean White with Subtle Border & Violet Badges */}
+            <div className="bg-white text-gray-900 px-3.5 py-3 sm:px-4 sm:py-3 flex items-center justify-between shrink-0 border-b border-gray-100 shadow-2xs">
               {/* Left: Avatar with Ring + Online Dot + Name */}
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="relative shrink-0">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-[#D8C7B5] shadow-xs bg-stone-800">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-purple-200 shadow-xs bg-purple-50 ring-2 ring-purple-50">
                     <img
                       src="/images/concierge-avatar.jpg"
                       alt="Da Graca AI Concierge"
                       className="w-full h-full object-cover object-top"
                       onError={(e) => {
-                        // Fallback if image path differs
                         (e.currentTarget as HTMLImageElement).src =
                           '/images/masonry/craftsman-work.png';
                       }}
                     />
                   </div>
                   {/* Active Online Indicator */}
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-[#1E362F]" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-white shadow-xs" />
                 </div>
 
                 <div className="flex flex-col min-w-0">
-                  <h3 className="font-heading font-bold text-white text-[14.5px] sm:text-[15.5px] tracking-tight truncate leading-tight">
+                  <h3 className="font-heading font-extrabold text-gray-900 text-[15px] tracking-tight truncate leading-tight flex items-center gap-1.5">
                     Da Graca Concierge
+                    <span className="inline-block px-1.5 py-0.2 bg-purple-50 border border-purple-200 text-gray-900 text-[9px] font-bold rounded-sm tracking-wide uppercase">
+                      AI
+                    </span>
                   </h3>
-                  <span className="text-[10px] sm:text-[10.5px] text-stone-300 font-medium truncate flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                  <span className="text-[10.5px] text-gray-600 font-medium truncate flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
                     AI Stone & Masonry Specialist
                   </span>
                 </div>
@@ -359,7 +371,7 @@ export function AIChatbot() {
                   onClick={handleResetChat}
                   title="Reset conversation"
                   aria-label="Reset conversation"
-                  className="p-1 sm:p-1.5 text-stone-300 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                  className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
@@ -367,23 +379,15 @@ export function AIChatbot() {
                   onClick={() => setIsOpen(false)}
                   title="Minimize chat"
                   aria-label="Minimize chat"
-                  className="p-1 sm:p-1.5 text-stone-300 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                  className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
                 >
                   <ChevronDown className="w-4.5 h-4.5" />
                 </button>
               </div>
             </div>
 
-            {/* Subheader Tag Pill: Fixed at top of body */}
-            <div className="bg-[#F9F7F4] pt-2 pb-0.5 text-center shrink-0">
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EBE5DC] text-stone-700 text-[10.5px] font-medium border border-stone-300/60 shadow-2xs">
-                <Clock className="w-3 h-3 text-[#B45309]" />
-                <span>Stone Concierge · 24/7 Advisory</span>
-              </div>
-            </div>
-
             {/* Scrollable Messages Area */}
-            <div className="flex-1 overflow-y-auto px-3 py-1.5 space-y-3">
+            <div className="flex-1 overflow-y-auto px-3 py-2 space-y-3 bg-white">
               {messages.map((message) => {
                 const isAssistant = message.sender === 'assistant';
 
@@ -396,20 +400,20 @@ export function AIChatbot() {
                   >
                     {isAssistant ? (
                       /* Assistant Message Card */
-                      <div className="max-w-[95%] bg-white rounded-xl rounded-tl-xs p-3 sm:p-3.5 shadow-xs border border-[#ECE5DC] space-y-2.5">
+                      <div className="max-w-[95%] bg-[#FAF9FD] rounded-2xl rounded-tl-xs p-3.5 shadow-2xs border border-[#EDE8F8] space-y-2.5">
                         {renderFormattedText(message.text)}
 
                         {/* Action buttons inside bot card */}
                         {message.actions && message.actions.length > 0 && (
-                          <div className="pt-1.5 border-t border-[#F2ECE4] space-y-1.5">
+                          <div className="pt-2 border-t border-purple-100/60 space-y-1.5">
                             {message.actions.map((action, idx) => (
                               <button
                                 key={idx}
                                 onClick={() => handleActionClick(action)}
-                                className="w-full border border-[#E5D7CA] rounded-lg px-3 py-2 bg-white hover:bg-[#FAF6F0] hover:border-[#B45309]/60 active:scale-[0.99] transition-all flex items-center justify-between text-stone-800 hover:text-[#B45309] text-[12px] font-medium group cursor-pointer shadow-2xs text-left"
+                                className="w-full border border-gray-200 hover:border-[#7C3AED]/50 bg-white hover:bg-[#F6F3FE] rounded-xl px-3 py-2 text-left flex items-center justify-between text-gray-900 hover:text-black text-[12px] font-medium transition-all group/btn shadow-2xs cursor-pointer active:scale-[0.99]"
                               >
-                                <span className="truncate pr-1.5">{action.label}</span>
-                                <ArrowRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#B45309] group-hover:translate-x-0.5 transition-all shrink-0" />
+                                <span className="truncate pr-1.5 font-medium">{action.label}</span>
+                                <ArrowRight className="w-3.5 h-3.5 text-gray-400 group-hover/btn:text-black group-hover/btn:translate-x-0.5 transition-all shrink-0" />
                               </button>
                             ))}
                           </div>
@@ -417,14 +421,14 @@ export function AIChatbot() {
                       </div>
                     ) : (
                       /* User Message Bubble */
-                      <div className="max-w-[85%] bg-[#1E362F] text-white rounded-xl rounded-tr-xs px-3.5 py-2 text-[12.5px] leading-relaxed shadow-xs">
+                      <div className="max-w-[85%] bg-gray-100 border border-gray-200/90 text-gray-900 rounded-2xl rounded-tr-xs px-3.5 py-2 text-[12.5px] leading-relaxed shadow-xs">
                         {message.text}
                       </div>
                     )}
 
                     {/* Timestamp */}
                     <span
-                      className={`text-[9.5px] text-stone-400 mt-0.5 px-1 ${
+                      className={`text-[9.5px] text-gray-400 mt-0.5 px-1 ${
                         isAssistant ? 'self-start' : 'self-end'
                       }`}
                     >
@@ -437,18 +441,18 @@ export function AIChatbot() {
               {/* Typing indicator */}
               {isLoading && (
                 <div className="flex flex-col items-start">
-                  <div className="bg-white rounded-xl rounded-tl-xs px-3 py-2 shadow-xs border border-[#ECE5DC] flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B45309] animate-bounce" />
+                  <div className="bg-[#FAF9FD] rounded-xl rounded-tl-xs px-3 py-2 shadow-2xs border border-[#EDE8F8] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] animate-bounce" />
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-[#B45309] animate-bounce"
+                      className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] animate-bounce"
                       style={{ animationDelay: '0.15s' }}
                     />
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-[#B45309] animate-bounce"
+                      className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] animate-bounce"
                       style={{ animationDelay: '0.3s' }}
                     />
                   </div>
-                  <span className="text-[9.5px] text-stone-400 mt-0.5 pl-1">
+                  <span className="text-[9.5px] text-gray-500 mt-0.5 pl-1">
                     Concierge is typing...
                   </span>
                 </div>
@@ -457,13 +461,12 @@ export function AIChatbot() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick Suggestion Pills Horizontal Carousel */}
-            <div className="bg-[#F9F7F4] border-t border-[#ECE5DC]/70 px-2 pt-1.5 pb-1 shrink-0">
+            {/* Quick Suggestion Pills Horizontal Carousel: ClickUp Style with Black Text */}
+            <div className="bg-white border-t border-gray-100 px-2 pt-2 pb-1.5 shrink-0">
               <div className="relative flex items-center">
-                {/* Optional Left scroll arrow on touch/desktop */}
                 <button
                   onClick={() => scrollPills('left')}
-                  className="hidden sm:flex text-stone-400 hover:text-stone-700 p-0.5 shrink-0 cursor-pointer"
+                  className="hidden sm:flex text-gray-400 hover:text-gray-700 p-0.5 shrink-0 cursor-pointer"
                   aria-label="Scroll left"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -481,67 +484,68 @@ export function AIChatbot() {
                       key={idx}
                       onClick={() => handleSendMessage(pill)}
                       disabled={isLoading}
-                      className="bg-white border border-[#DDD3C7] text-stone-800 hover:border-[#B45309] hover:text-[#B45309] active:scale-95 text-[11px] font-medium px-2.5 py-1 rounded-full whitespace-nowrap shadow-2xs transition-colors cursor-pointer shrink-0 disabled:opacity-50"
+                      className="bg-[#F6F3FE] hover:bg-[#EDE8FD] border border-[#E4DCFD] text-gray-900 hover:text-black active:scale-95 text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap shadow-2xs transition-all cursor-pointer shrink-0 disabled:opacity-50"
                     >
                       {pill}
                     </button>
                   ))}
                 </div>
 
-                {/* Optional Right scroll arrow */}
                 <button
                   onClick={() => scrollPills('right')}
-                  className="hidden sm:flex text-stone-400 hover:text-stone-700 p-0.5 shrink-0 cursor-pointer"
+                  className="hidden sm:flex text-gray-400 hover:text-gray-700 p-0.5 shrink-0 cursor-pointer"
                   aria-label="Scroll right"
                 >
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              {/* Delicate Scroll Track Indicator Bar (matching template image) */}
+              {/* Delicate Scroll Track Indicator Bar */}
               <div className="flex items-center justify-center gap-1 pt-1 pb-0.5">
-                <span className="text-[8px] text-stone-400 leading-none select-none">‹</span>
-                <div className="w-20 h-0.5 bg-[#E3D9CD] rounded-full overflow-hidden relative">
+                <span className="text-[8px] text-gray-300 leading-none select-none">‹</span>
+                <div className="w-20 h-0.5 bg-gray-100 rounded-full overflow-hidden relative">
                   <div
-                    className="h-full bg-[#B89476] rounded-full transition-all duration-150"
+                    className="h-full bg-[#7C3AED] rounded-full transition-all duration-150"
                     style={{
                       width: '35%',
                       transform: `translateX(${scrollProgress * 185}%)`,
                     }}
                   />
                 </div>
-                <span className="text-[8px] text-stone-400 leading-none select-none">›</span>
+                <span className="text-[8px] text-gray-300 leading-none select-none">›</span>
               </div>
             </div>
 
-            {/* Bottom Input Area */}
-            <div className="p-2 sm:p-2.5 bg-[#F9F7F4] flex items-center gap-1.5 border-t border-[#ECE5DC]/60 shrink-0">
-              <div className="flex-1 rounded-xl border border-[#C59B75] bg-white px-3 py-2 shadow-2xs focus-within:ring-2 focus-within:ring-[#B45309]/30 transition-all flex items-center">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Ask about stonework, patios, chimneys, estimates..."
-                  disabled={isLoading}
-                  className="w-full bg-transparent text-[12.5px] text-stone-900 placeholder:text-stone-400 placeholder:text-[11.5px] focus:outline-none disabled:opacity-50"
-                />
-              </div>
+            {/* Bottom Input Area: ClickUp Signature Purple Outline & Purple Send Button */}
+            <div className="p-2 sm:p-2.5 bg-white flex flex-col gap-1 border-t border-gray-100 shrink-0">
+              <div className="flex items-center gap-1.5">
+                <div className="flex-1 rounded-xl border border-[#9333EA]/60 focus-within:border-[#7C3AED] focus-within:ring-2 focus-within:ring-[#7C3AED]/20 bg-white px-3 py-2 shadow-2xs transition-all flex items-center">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Ask about stonework, patios, chimneys, estimates..."
+                    disabled={isLoading}
+                    className="w-full bg-transparent text-[12.5px] text-gray-900 placeholder:text-gray-400 placeholder:text-[11.5px] focus:outline-none disabled:opacity-50"
+                  />
+                </div>
 
-              {/* Send Button */}
-              <button
-                onClick={() => handleSendMessage()}
-                disabled={!input.trim() || isLoading}
-                aria-label="Send message"
-                className={`w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
-                  input.trim() && !isLoading
-                    ? 'bg-[#1E362F] hover:bg-[#152822] text-white shadow-md active:scale-95 cursor-pointer'
-                    : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-                }`}
-              >
-                <SendHorizontal className="w-4 h-4 -rotate-12 translate-x-0.5" />
-              </button>
+                {/* Send Button: ClickUp Purple Button */}
+                <button
+                  onClick={() => handleSendMessage()}
+                  disabled={!input.trim() || isLoading}
+                  aria-label="Send message"
+                  className={`w-9 h-9 sm:w-9.5 sm:h-9.5 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
+                    input.trim() && !isLoading
+                      ? 'bg-[#7C3AED] hover:bg-[#6D28D9] text-white shadow-sm active:scale-95 cursor-pointer'
+                      : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                  }`}
+                >
+                  <SendHorizontal className="w-4 h-4 -rotate-12 translate-x-0.5" />
+                </button>
+              </div>          
             </div>
           </motion.div>
         )}
