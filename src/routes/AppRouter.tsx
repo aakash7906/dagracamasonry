@@ -7,8 +7,26 @@ import { Gallery } from '@/pages/website/Gallery';
 import { Testimonials } from '@/pages/website/Testimonials';
 import { Contact } from '@/pages/website/Contact';
 import { NotFound } from '@/pages/website/NotFound';
+import { UserAccount } from '@/pages/website/UserAccount';
+import { Login, Signup } from '@/pages/auth';
 
 export const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signin',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
+  },
+  {
+    path: '/register',
+    element: <Signup />,
+  },
   {
     path: '/',
     element: <Layout />,
@@ -36,6 +54,14 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact />,
+      },
+      {
+        path: 'account',
+        element: <UserAccount />,
+      },
+      {
+        path: 'my-account',
+        element: <UserAccount />,
       },
       {
         path: '*',

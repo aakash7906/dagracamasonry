@@ -1,14 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { navigationLinks } from '@/data/mockData';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { Hammer, Phone, Menu, X, ShieldCheck } from 'lucide-react';
+import { Hammer, Phone, Menu, X, ShieldCheck, ShoppingCart, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
+
+  const { user, isAuthenticated, logout } = useAuth();
+  const { itemCount, setIsCartOpen } = useCart();
   const location = useLocation();
 
   useEffect(() => {
@@ -19,13 +27,26 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close menus on route change or outside click
   useEffect(() => {
     setMobileMenuOpen(false);
+    setAccountDropdownOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setAccountDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
+      <CartDrawer />
+
       {/* Top emergency / quick contact bar */}
       <div className="bg-stone-900 text-stone-200 text-xs py-2 border-b border-stone-800">
         <Container size="full" className="max-w-[1600px] flex items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 xl:px-10">
@@ -98,19 +119,20 @@ export function Header() {
             })}
           </nav>
 
-          {/* Header Action Button */}
-          <div className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0">
+          {/* Header Action Button & Icons */}
+          <div className="hidden lg:flex items-center gap-3.5 xl:gap-4 shrink-0">
             <a
               href="tel:9085557866"
-              className="text-stone-700 hover:text-stone-950 transition-colors text-sm font-semibold flex items-center gap-1.5 focus-visible:outline-none whitespace-nowrap"
+              className="text-stone-700 hover:text-stone-950 transition-colors text-xs xl:text-sm font-semibold flex items-center gap-1.5 focus-visible:outline-none whitespace-nowrap"
             >
               <Phone className="h-4 w-4 text-[#b45309]" />
               <span>(908) 555-7866</span>
             </a>
+
             <Button
               variant="default"
               size="default"
-              className="bg-[#b45309] hover:bg-[#9a3412] text-white font-bold shadow-sm text-xs xl:text-sm rounded-lg px-4 sm:px-5"
+              className="bg-[#b45309] hover:bg-[#9a3412] text-white font-bold shadow-sm text-xs xl:text-sm rounded-lg px-3.5 sm:px-4.5"
               onClick={() => {
                 const el = document.getElementById('consultation');
                 if (el) {
@@ -122,10 +144,153 @@ export function Header() {
             >
               Get Free Estimate
             </Button>
+
+            {/* Cart & Account Icons Container */}
+            <div className="flex items-center gap-2 pl-2 border-l border-stone-200">
+              {/* Cart Icon Button */}
+              <button
+                type="button"
+                onClick={() => setIsCartOpen(true)}
+                className="relative p-2 text-stone-900 hover:text-[#b45309] transition-colors rounded-md focus:outline-none cursor-pointer"
+                title="View Samples & Cart"
+                aria-label="View Cart"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {itemCount > 0 && (
+                  <span className="absolute top-0.5 right-0.5 h-4 w-4 bg-[#b45309] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Account Dropdown */}
+              <div className="relative" ref={accountMenuRef}>
+                <button
+                  type="button"
+                  onClick={() => setAccountDropdownOpen(!accountDropdownOpen)}
+                  className={`p-1.5 border rounded-md transition-all flex items-center justify-center cursor-pointer focus:outline-none ${
+                    accountDropdownOpen
+                      ? 'border-stone-900 bg-stone-100 text-stone-950 shadow-xs ring-1 ring-stone-900'
+                      : 'border-stone-800 text-stone-900 hover:bg-stone-50'
+                  }`}
+                  title="Account Menu"
+                  aria-label="Account Menu"
+                >
+                  <User className="h-5 w-5" />
+                </button>
+
+                <AnimatePresence>
+                  {accountDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2.5 w-48 bg-white rounded-md border border-stone-200 shadow-xl p-3 z-50 flex flex-col gap-1 text-left"
+                    >
+                      {isAuthenticated && user ? (
+                        <>
+                          <Link
+                            to="/account"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2 py-1.5 mb-1 bg-stone-50 hover:bg-amber-50/60 rounded border border-stone-200/60 block transition-colors"
+                          >
+                            <p className="text-[11px] font-bold text-stone-900 uppercase tracking-wider truncate">
+                              {user.name}
+                            </p>
+                            <p className="text-[10px] text-stone-500 truncate">{user.email}</p>
+                          </Link>
+                          <Link
+                            to="/account"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            My Account
+                          </Link>
+                          <Link
+                            to="/#consultation"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            Bookings
+                          </Link>
+                          <div className="my-1 border-t border-stone-200" />
+                          <button
+                            onClick={() => {
+                              logout();
+                              setAccountDropdownOpen(false);
+                            }}
+                            className="w-full text-left px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                          >
+                            Sign Out
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            to="/login"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            Sign In
+                          </Link>
+                          <Link
+                            to="/signup"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            Create Account
+                          </Link>
+                          <div className="my-1.5 border-t border-stone-200" />
+                          <Link
+                            to="/#consultation"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            Bookings
+                          </Link>
+                          <Link
+                            to="/account"
+                            onClick={() => setAccountDropdownOpen(false)}
+                            className="px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-stone-800 hover:text-amber-800 hover:bg-stone-50 rounded transition-colors"
+                          >
+                            My Account
+                          </Link>
+                        </>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
 
           {/* Mobile Menu & Direct Call Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1.5">
+            {/* Mobile Cart Button */}
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2 text-stone-800 hover:text-amber-700"
+              aria-label="View Cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <span className="absolute top-0.5 right-0.5 h-3.5 w-3.5 bg-[#b45309] text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Account Button (direct link to login/signup) */}
+            <Link
+              to={isAuthenticated ? '/#consultation' : '/login'}
+              className="p-1.5 border border-stone-800 rounded-md text-stone-800 hover:bg-stone-100"
+              aria-label="Account"
+            >
+              <User className="h-4 w-4" />
+            </Link>
+
             <a
               href="tel:9085557866"
               className="p-2 text-stone-700 hover:text-amber-700 sm:hidden"
@@ -133,6 +298,7 @@ export function Header() {
             >
               <Phone className="h-5 w-5 text-amber-600" />
             </a>
+
             <Button
               variant="ghost"
               size="icon"
@@ -179,6 +345,59 @@ export function Header() {
                 );
               })}
               <div className="pt-4 mt-2 border-t border-stone-200 flex flex-col gap-3">
+                {isAuthenticated && user ? (
+                  <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-bold text-stone-900">{user.name}</p>
+                        <p className="text-[11px] text-stone-500">{user.email}</p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setMobileMenuOpen(false);
+                        }}
+                        className="text-xs font-semibold text-red-600 hover:underline cursor-pointer"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                    <Link
+                      to="/account"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-center py-2 bg-white rounded-lg border border-stone-200 text-xs font-bold uppercase tracking-wider text-stone-800 hover:bg-stone-50"
+                    >
+                      My Account Settings
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link
+                        to="/login"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-center py-2.5 rounded-lg border border-stone-300 text-xs font-bold uppercase tracking-wider text-stone-800 hover:bg-stone-50"
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        to="/signup"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-center py-2.5 rounded-lg bg-stone-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-stone-800"
+                      >
+                        Create Account
+                      </Link>
+                    </div>
+                    <Link
+                      to="/account"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-center py-2 bg-stone-100/80 rounded-lg text-xs font-bold uppercase tracking-wider text-stone-700 hover:bg-stone-200"
+                    >
+                      My Account
+                    </Link>
+                  </div>
+                )}
+
                 <a
                   href="tel:9085557866"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-100 text-stone-800 py-3 text-sm font-semibold hover:bg-stone-200"

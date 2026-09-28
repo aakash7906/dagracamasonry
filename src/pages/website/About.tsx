@@ -48,7 +48,7 @@ export function About() {
           <div className="lg:col-span-6">
             <div className="relative rounded-md overflow-hidden border border-stone-200 shadow-2xl bg-white">
               <img
-                src="/images/masonry/craftsman-work.jpg"
+                src="/images/masonry/craftsman-work.png"
                 alt="Master stone mason craftsman laying precision natural fieldstone with mortar"
                 className="w-full h-[320px] sm:h-[420px] lg:h-[480px] object-cover"
               />

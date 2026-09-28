@@ -5,3 +5,4 @@ export { Gallery } from './Gallery';
 export { Testimonials } from './Testimonials';
 export { Contact } from './Contact';
 export { NotFound } from './NotFound';
+export { UserAccount } from './UserAccount';

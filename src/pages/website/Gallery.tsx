@@ -162,7 +162,7 @@ export function Gallery() {
             </span>
             <button
               onClick={() => setSelectedMaterial('all')}
-              className={`text-xs px-2.5 py-1 rounded-full transition-colors ${
+              className={`text-xs px-2.5 py-1 rounded-md transition-colors ${
                 selectedMaterial === 'all'
                   ? 'bg-amber-100 text-amber-900 border border-amber-300 font-semibold'
                   : 'bg-stone-100 text-stone-600 hover:text-stone-900 border border-stone-200'
@@ -174,7 +174,7 @@ export function Gallery() {
               <button
                 key={mat}
                 onClick={() => setSelectedMaterial(selectedMaterial === mat ? 'all' : mat)}
-                className={`text-xs px-2.5 py-1 rounded-full transition-colors ${
+                className={`text-xs px-2.5 py-1 rounded-md transition-colors ${
                   selectedMaterial === mat
                     ? 'bg-amber-100 text-amber-900 border border-amber-300 font-semibold'
                     : 'bg-stone-100 text-stone-600 hover:text-stone-900 border border-stone-200'

@@ -71,7 +71,7 @@ export const servicesData: ServiceItem[] = [
     fullDescription: 'High-capacity masonry crews experienced in commercial timelines, safety standards, CMU block reinforcement, and architect-specified stone veneers.',
     iconName: 'Building2',
     features: ['High-volume CMU installation', 'Commercial facade restoration', 'Certified scaffolding & rigging', 'Code-compliant masonry ramps'],
-    imageUrl: '/images/masonry/craftsman-work.jpg',
+    imageUrl: '/images/masonry/craftsman-work.png',
   },
 ];
 
