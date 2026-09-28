@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { AIChatbot } from '@/components/chatbot/AIChatbot';
 
 export function Layout() {
   const { pathname, hash } = useLocation();
@@ -30,6 +31,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <AIChatbot />
     </div>
   );
 }

@@ -146,7 +146,7 @@ export function ConsultationSection() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                <form id="consultation-form" onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                   <div className="space-y-1 mb-2">
                     <h3 className="text-xl sm:text-2xl font-heading font-bold text-stone-900">
                       Get a Quick Free Estimate
