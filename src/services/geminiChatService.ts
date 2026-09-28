@@ -3,7 +3,11 @@
  * Powered by Google Gemini API with robust domain guardrails and instant fallback.
  */
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+const GEMINI_API_KEY =
+  (typeof import.meta !== 'undefined' &&
+    (import.meta as { env?: { VITE_GEMINI_API_KEY?: string } }).env
+      ?.VITE_GEMINI_API_KEY) ||
+  '';
 
 export interface ChatMessage {
   id: string;
