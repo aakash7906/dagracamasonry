@@ -36,15 +36,8 @@ export function Testimonials() {
   return (
     <div className="py-12 sm:py-20 bg-stone-50 text-stone-900 min-h-screen">
       {/* Header Banner */}
-      <Container className="mb-14">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl space-y-4">
-          {/* <Badge
-            variant="stone"
-            className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
-            Client Trust & Reputation
-          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Reputation Carved in Stone
           </h1>
@@ -149,7 +142,7 @@ export function Testimonials() {
       </Container>
 
       {/* Testimonials Grid */}
-      <Container className="mb-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredTestimonials.map((item) => (
             <div
@@ -201,7 +194,7 @@ export function Testimonials() {
       </Container>
 
       {/* Trust & Guarantee Banner */}
-      <Container className="mb-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
         <div className="rounded-md bg-white border border-stone-200 p-8 sm:p-12 shadow-md">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div className="space-y-2">
@@ -244,7 +237,7 @@ export function Testimonials() {
       </Container>
 
       {/* Consultation Banner CTA */}
-      <Container>
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="rounded-md bg-gradient-to-r from-stone-900 to-stone-950 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">

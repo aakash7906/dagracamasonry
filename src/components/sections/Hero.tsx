@@ -34,14 +34,6 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-7 space-y-6 text-left"
           >
-            {/* Top Kicker */}
-            {/* <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-[#b45309]" />
-              <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#b45309]">
-                Residential & Commercial High-End Masonry Specialists
-              </span>
-            </div> */}
-
             {/* Main Headline with italicized serif accent */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-[1.12]">
               Expert Masonry:{' '}
@@ -73,7 +65,6 @@ export function Hero() {
                   variant="outline"
                   className="w-full sm:w-auto border-stone-300 hover:border-stone-400 bg-white text-stone-800 font-bold text-sm sm:text-base px-6 py-4 rounded-xl shadow-2xs hover:bg-stone-50 flex items-center justify-center gap-2"
                 >
-                  {/* <Sparkles className="h-4 w-4 text-[#b45309]" /> */}
                   <span>Explore Recent Projects</span>
                 </Button>
               </Link>

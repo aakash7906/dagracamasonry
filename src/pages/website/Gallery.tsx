@@ -86,12 +86,8 @@ export function Gallery() {
   return (
     <div className="py-12 lg:py-20 bg-stone-50 min-h-screen text-stone-900">
       {/* Header Banner */}
-      <Container className="mb-14">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl space-y-4">
-          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
-            <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
-            Master Craftsman Portfolio
-          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Our Work Carved in Stone
           </h1>
@@ -192,7 +188,7 @@ export function Gallery() {
       </Container>
 
       {/* Projects Grid */}
-      <Container>
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         {filteredProjects.length === 0 ? (
           <div className="py-20 text-center rounded-md bg-white border border-stone-200 space-y-4 shadow-sm">
             <Layers className="h-12 w-12 text-stone-400 mx-auto" />
@@ -466,7 +462,7 @@ export function Gallery() {
       </AnimatePresence>
 
       {/* Bottom Consultation Banner */}
-      <Container className="mt-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mt-20">
         <div className="rounded-md bg-white border border-stone-200 p-8 sm:p-12 text-center space-y-6 shadow-md">
           <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
             Ready to Build Your Stone Legacy?

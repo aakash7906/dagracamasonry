@@ -101,12 +101,8 @@ export function Contact() {
   return (
     <div className="py-12 lg:py-20 bg-stone-50 text-stone-900 min-h-screen">
       {/* Header Banner */}
-      <Container className="mb-14">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl space-y-4">
-          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
-            <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
-            Direct Communication & Free Estimates
-          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Connect With Our Master Stonemasons
           </h1>
@@ -226,7 +222,7 @@ export function Contact() {
       </Container>
 
       {/* Main Form & Scope Section */}
-      <Container className="mb-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
         <div className="rounded-md bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Info Column */}
@@ -594,7 +590,7 @@ export function Contact() {
       </Container>
 
       {/* Interactive FAQ Section */}
-      <Container className="mb-14">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl mx-auto space-y-8">
           <div className="text-center space-y-3">
             <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">

@@ -6,12 +6,9 @@ import { Link } from 'react-router-dom';
 export function About() {
   return (
     <div className="py-16 lg:py-24 bg-stone-50 text-stone-900">
-      <Container>
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Header */}
         <div className="max-w-3xl space-y-4 mb-16">
-          {/* <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
-            Our Story & Heritage
-          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight">
             Crafting Stone Legacies for Over Two Decades
           </h1>

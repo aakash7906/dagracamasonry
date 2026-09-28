@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Phone, Sparkles } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type FilterCategory = 'all' | 'patios' | 'facades' | 'historic' | 'walls';
@@ -199,9 +199,6 @@ export function PortfolioSection() {
         {/* Dark Callout Banner across bottom (Exact match to sample image) */}
         <div className="rounded-md bg-stone-950 border border-stone-800 p-5 sm:p-6 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-4">
-            <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-[#b45309] text-white flex items-center justify-center shrink-0 shadow-md">
-              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
-            </div>
             <div>
               <h4 className="text-sm sm:text-base font-extrabold font-heading text-white">
                 Have a project in mind for this season?

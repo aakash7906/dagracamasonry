@@ -4,12 +4,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { servicesData } from '@/data/mockData';
 import {
-  Gem,
-  Layers,
-  Compass,
-  Flame,
   ShieldCheck,
-  Building2,
   CheckCircle2,
   ArrowRight,
   Phone,
@@ -17,16 +12,6 @@ import {
   Check,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import type { JSX } from 'react';
-
-const iconMap: Record<string, JSX.Element> = {
-  Gem: <Gem className="h-6 w-6 text-amber-700" />,
-  Layers: <Layers className="h-6 w-6 text-amber-700" />,
-  Compass: <Compass className="h-6 w-6 text-amber-700" />,
-  Flame: <Flame className="h-6 w-6 text-amber-700" />,
-  ShieldCheck: <ShieldCheck className="h-6 w-6 text-amber-700" />,
-  Building2: <Building2 className="h-6 w-6 text-amber-700" />,
-};
 
 const processSteps = [
   {
@@ -67,15 +52,8 @@ export function Services() {
   return (
     <div className="py-12 sm:py-20 bg-stone-50 text-stone-900 min-h-screen">
       {/* Header Banner */}
-      <Container className="mb-14">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl space-y-4">
-          {/* <Badge
-            variant="stone"
-            className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-amber-700 mr-1.5 inline" />
-            Specialized Capabilities & Disciplines
-          </Badge> */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
             Architectural Masonry & Structural Stone Services
           </h1>
@@ -131,7 +109,7 @@ export function Services() {
       </Container>
 
       {/* Services Detailed List */}
-      <Container className="mb-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
         <div className="space-y-12">
           {filteredServices.map((service, index) => (
             <div
@@ -146,7 +124,7 @@ export function Services() {
               >
                 {/* Image Section */}
                 <div
-                  className={`lg:col-span-5 h-[280px] sm:h-[380px] lg:h-full relative overflow-hidden bg-stone-100 ${
+                  className={`lg:col-span-6 self-stretch h-[280px] sm:h-[380px] lg:h-full relative overflow-hidden bg-stone-100 ${
                     index % 2 === 1 ? 'lg:order-2' : ''
                   }`}
                 >
@@ -156,21 +134,11 @@ export function Services() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-4 left-4 h-12 w-12 rounded-xl bg-white/95 backdrop-blur-md border border-stone-200 flex items-center justify-center shadow-md">
-                    {iconMap[service.iconName] || <Gem className="h-6 w-6 text-amber-700" />}
-                  </div>
-                  {service.popular && (
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-amber-600 text-white font-semibold text-xs shadow-sm">
-                        Signature Craft
-                      </Badge>
-                    </div>
-                  )}
                 </div>
 
                 {/* Content Section */}
                 <div
-                  className={`lg:col-span-7 p-6 sm:p-10 lg:p-12 space-y-6 ${
+                  className={`lg:col-span-6 p-6 sm:p-8 lg:p-10 xl:p-12 space-y-6 ${
                     index % 2 === 1 ? 'lg:order-1' : ''
                   }`}
                 >
@@ -236,7 +204,7 @@ export function Services() {
       </Container>
 
       {/* 5-Step Craft Process Section */}
-      <Container className="mb-20">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
         <div className="rounded-md bg-white border border-stone-200 p-6 sm:p-10 lg:p-16 shadow-lg space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge
@@ -279,7 +247,7 @@ export function Services() {
       </Container>
 
       {/* Consultation Banner CTA */}
-      <Container>
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="rounded-md bg-gradient-to-r from-amber-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
