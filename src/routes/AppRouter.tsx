@@ -8,6 +8,7 @@ import { Testimonials } from '@/pages/website/Testimonials';
 import { Contact } from '@/pages/website/Contact';
 import { NotFound } from '@/pages/website/NotFound';
 import { UserAccount } from '@/pages/website/UserAccount';
+import { CartPage } from '@/pages/website/CartPage';
 import { Login, Signup } from '@/pages/auth';
 
 export const router = createBrowserRouter([
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: 'my-account',
         element: <UserAccount />,
+      },
+      {
+        path: 'cart',
+        element: <CartPage />,
       },
       {
         path: '*',

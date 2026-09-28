@@ -8,7 +8,13 @@ export function Hero() {
   const scrollToConsultation = () => {
     const el = document.getElementById('consultation');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 108;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(0, elementPosition - headerHeight),
+        behavior: 'smooth',
+      });
     }
   };
 

@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { navigationLinks } from '@/data/mockData';
 import { Button } from '@/components/ui/Button';
-import { Container } from '@/components/ui/Container';
 import { Hammer, Phone, Menu, X, ShieldCheck, ShoppingCart, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '@/context/AuthContext';
@@ -43,13 +42,29 @@ export function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const scrollToConsultation = () => {
+    setMobileMenuOpen(false);
+    const el = document.getElementById('consultation');
+    if (el) {
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 108;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(0, elementPosition - headerHeight),
+        behavior: 'smooth',
+      });
+    } else {
+      window.location.href = '/#consultation';
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       <CartDrawer />
 
       {/* Top emergency / quick contact bar */}
-      <div className="bg-stone-900 text-stone-200 text-xs py-2 border-b border-stone-800">
-        <Container size="full" className="max-w-[1600px] flex items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 xl:px-10">
+      <div className="bg-stone-900 text-stone-200 text-xs py-2 border-b border-stone-800 w-full">
+        <div className="w-full flex items-center justify-between gap-2 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14">
           <div className="flex items-center gap-2 min-w-0">
             <ShieldCheck className="h-3.5 w-3.5 text-amber-400 shrink-0" />
             <span className="font-medium text-stone-200 text-[11px] sm:text-xs truncate">
@@ -67,7 +82,7 @@ export function Header() {
               <span className="sm:hidden">Call Now</span>
             </a>
           </div>
-        </Container>
+        </div>
       </div>
 
       {/* Main navigation bar - Light Luxury Theme */}
@@ -78,8 +93,8 @@ export function Header() {
             : 'bg-white/90 border-b border-stone-200/80 py-3.5 sm:py-4'
         }`}
       >
-        <Container size="full" className="max-w-[1600px] flex items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
-          {/* Brand Logo */}
+        <div className="w-full flex items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14">
+          {/* Brand Logo - Shifted to left */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none shrink-0">
             <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-[#b45309] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
               <Hammer className="h-4 w-4 sm:h-5 sm:w-5 fill-white stroke-white" />
@@ -94,8 +109,8 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-5">
+          {/* Desktop Navigation - Expanded across middle space */}
+          <nav className="hidden lg:flex items-center justify-center flex-1 mx-4 lg:mx-6 xl:mx-10 2xl:mx-14 gap-2 lg:gap-3 xl:gap-5 2xl:gap-7">
             {navigationLinks.map((item) => {
               const isActive =
                 item.href === '/'
@@ -107,7 +122,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`text-xs xl:text-sm font-medium transition-all px-3 xl:px-3.5 py-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 whitespace-nowrap ${
+                  className={`text-xs xl:text-sm font-medium transition-all px-3 xl:px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 whitespace-nowrap ${
                     isActive
                       ? 'text-amber-900 bg-amber-100/80 border border-amber-200/70 shadow-xs font-semibold'
                       : 'text-stone-700 hover:text-[#b45309] hover:bg-stone-100'
@@ -119,8 +134,8 @@ export function Header() {
             })}
           </nav>
 
-          {/* Header Action Button & Icons */}
-          <div className="hidden lg:flex items-center gap-3.5 xl:gap-4 shrink-0">
+          {/* Header Action Button & Icons - Shifted to right */}
+          <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0">
             <a
               href="tel:9085557866"
               className="text-stone-700 hover:text-stone-950 transition-colors text-xs xl:text-sm font-semibold flex items-center gap-1.5 focus-visible:outline-none whitespace-nowrap"
@@ -133,14 +148,7 @@ export function Header() {
               variant="default"
               size="default"
               className="bg-[#b45309] hover:bg-[#9a3412] text-white font-bold shadow-sm text-xs xl:text-sm rounded-lg px-3.5 sm:px-4.5"
-              onClick={() => {
-                const el = document.getElementById('consultation');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  window.location.href = '/#consultation';
-                }
-              }}
+              onClick={scrollToConsultation}
             >
               Get Free Estimate
             </Button>
@@ -168,10 +176,10 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setAccountDropdownOpen(!accountDropdownOpen)}
-                  className={`p-1.5 border rounded-md transition-all flex items-center justify-center cursor-pointer focus:outline-none ${
+                  className={`p-2 rounded-md transition-colors flex items-center justify-center cursor-pointer focus:outline-none ${
                     accountDropdownOpen
-                      ? 'border-stone-900 bg-stone-100 text-stone-950 shadow-xs ring-1 ring-stone-900'
-                      : 'border-stone-800 text-stone-900 hover:bg-stone-50'
+                      ? 'text-[#b45309] bg-stone-100'
+                      : 'text-stone-900 hover:text-[#b45309]'
                   }`}
                   title="Account Menu"
                   aria-label="Account Menu"
@@ -284,11 +292,11 @@ export function Header() {
 
             {/* Mobile Account Button (direct link to login/signup) */}
             <Link
-              to={isAuthenticated ? '/#consultation' : '/login'}
-              className="p-1.5 border border-stone-800 rounded-md text-stone-800 hover:bg-stone-100"
+              to={isAuthenticated ? '/account' : '/login'}
+              className="p-2 text-stone-900 hover:text-[#b45309] transition-colors rounded-md"
               aria-label="Account"
             >
-              <User className="h-4 w-4" />
+              <User className="h-5 w-5" />
             </Link>
 
             <a
@@ -309,7 +317,7 @@ export function Header() {
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
-        </Container>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}
@@ -408,15 +416,7 @@ export function Header() {
                 <Button
                   variant="default"
                   className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 text-sm rounded-xl"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    const el = document.getElementById('consultation');
-                    if (el) {
-                      el.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                      window.location.href = '/#consultation';
-                    }
-                  }}
+                  onClick={scrollToConsultation}
                 >
                   Get Free Estimate
                 </Button>

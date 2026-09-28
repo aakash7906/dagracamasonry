@@ -10,7 +10,13 @@ export function Layout() {
     if (hash) {
       const element = document.querySelector(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.getBoundingClientRect().height : 108;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: Math.max(0, elementPosition - headerHeight),
+          behavior: 'smooth',
+        });
         return;
       }
     }

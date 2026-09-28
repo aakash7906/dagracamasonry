@@ -28,7 +28,7 @@ export function CTASection() {
   };
 
   return (
-    <section id="consultation" className="py-14 sm:py-24 bg-white border-b border-stone-200 relative overflow-hidden">
+    <section id="consultation" className="scroll-mt-24 sm:scroll-mt-28 py-14 sm:py-24 bg-white border-b border-stone-200 relative overflow-hidden">
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <Container>

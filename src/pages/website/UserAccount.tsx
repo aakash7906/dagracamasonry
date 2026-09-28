@@ -19,8 +19,8 @@ export function UserAccount() {
   const { user, updateUser } = useAuth();
 
   // Form states with fallback to initial reference image values
-  const [displayName, setDisplayName] = useState(user?.name || 'Aakash');
-  const [email, setEmail] = useState(user?.email || 'a@gmail.com');
+  const [displayName, setDisplayName] = useState(user?.name || 'User');
+  const [email, setEmail] = useState(user?.email || 'google@gmail.com');
   const [location, setLocation] = useState(user?.location || '');
   const [websiteUrl, setWebsiteUrl] = useState(user?.websiteUrl || '');
   const [githubHandle, setGithubHandle] = useState(user?.githubHandle || '');
@@ -183,7 +183,7 @@ export function UserAccount() {
                     type="text"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
-                    placeholder="Aakash"
+                    placeholder="Name"
                     className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-white text-stone-900 placeholder-stone-400 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 transition-all"
                   />
                 </div>
@@ -201,7 +201,7 @@ export function UserAccount() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="a@gmail.com"
+                    placeholder="google@gmail.com"
                     className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 bg-white text-stone-900 placeholder-stone-400 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 transition-all"
                   />
                 </div>

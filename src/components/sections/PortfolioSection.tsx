@@ -11,7 +11,15 @@ export function PortfolioSection() {
 
   const scrollToConsultation = () => {
     const el = document.getElementById('consultation');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 108;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(0, elementPosition - headerHeight),
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (

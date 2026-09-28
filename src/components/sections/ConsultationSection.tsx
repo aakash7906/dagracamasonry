@@ -8,9 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select';
-import { Phone, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Phone, Clock, ShieldCheck, CheckCircle2, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export function ConsultationSection() {
+  const { addEstimate, setIsCartOpen } = useCart();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: '',
@@ -23,11 +25,21 @@ export function ConsultationSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    addEstimate({
+      type: 'quick-estimate',
+      title: 'Quick Free Estimate Request',
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      location: form.location,
+      service: form.service,
+      details: form.details,
+    });
     setSubmitted(true);
   };
 
   return (
-    <section id="consultation" className="py-14 sm:py-20 lg:py-24 bg-[#F4F0E8] border-b border-[#E5E0D5]">
+    <section id="consultation" className="scroll-mt-24 sm:scroll-mt-28 py-14 sm:py-20 lg:py-24 bg-[#F4F0E8] border-b border-[#E5E0D5]">
       <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Left Column: Info & Trust Points */}
@@ -36,14 +48,14 @@ export function ConsultationSection() {
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#b45309]" />
                 <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-[#b45309]">
-                  Estimates & Consultations
+                  Quick & Free Estimate
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight leading-tight">
-                Request Your Free On-Site Consultation
+                Request Your Quick Free Estimate
               </h2>
               <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-                All estimates are performed on-site by a licensed master mason. We walk your property, inspect grades, test soils, and provide an itemized proposal with zero hidden surprises.
+                Receive a fast, preliminary digital cost breakdown and stone consultation from our master masons with zero obligation. Share your basic project scope and our estimators will calculate pricing.
               </p>
             </div>
 
@@ -65,7 +77,7 @@ export function ConsultationSection() {
                     (908) 555-STONE / (908) 555-7866
                   </a>
                   <p className="text-[11px] text-stone-500 mt-0.5">
-                    Mon – Sat: 7:00 AM – 6:00 PM • Fast response
+                    Mon – Sat: 7:00 AM – 6:00 PM • Fast phone estimates
                   </p>
                 </div>
               </div>
@@ -77,10 +89,10 @@ export function ConsultationSection() {
                 </div>
                 <div>
                   <h4 className="font-heading font-bold text-stone-900 text-sm sm:text-base">
-                    Guaranteed 48-Hour Quote Breakdown
+                    Preliminary Quote in 24–48 Hours
                   </h4>
                   <p className="text-xs text-stone-600 leading-relaxed mt-0.5">
-                    Receive comprehensive line-item pricing, material specs, and timeline within 48 hours of site survey.
+                    Receive initial line-item pricing, material specs, and preliminary budget ranges tailored to your project.
                   </p>
                 </div>
               </div>
@@ -111,27 +123,36 @@ export function ConsultationSection() {
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
                   <h3 className="text-2xl font-bold font-heading text-stone-900">
-                    Consultation Request Sent!
+                    Free Estimate Request Received!
                   </h3>
                   <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                    Thank you. A master masonry estimator from Da Graca Masonry will contact you within 24 business hours to confirm your property survey details.
+                    Thank you! Our estimating team will review your project details and deliver a preliminary cost estimate to your email within 24 business hours.
                   </p>
-                  <Button
-                    variant="outline"
-                    onClick={() => setSubmitted(false)}
-                    className="border-stone-300 text-xs mt-2"
-                  >
-                    Submit Another Inquiry
-                  </Button>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <Button
+                      onClick={() => setIsCartOpen(true)}
+                      className="bg-[#b45309] hover:bg-[#9a3412] text-white text-xs px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-xs cursor-pointer"
+                    >
+                      <ShoppingCart className="h-4 w-4" />
+                      <span>View in Cart & Inquiries</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => setSubmitted(false)}
+                      className="border-stone-300 text-xs px-4 py-2.5 rounded-lg cursor-pointer"
+                    >
+                      Submit Another Inquiry
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                   <div className="space-y-1 mb-2">
                     <h3 className="text-xl sm:text-2xl font-heading font-bold text-stone-900">
-                      Get an On-Site Estimate
+                      Get a Quick Free Estimate
                     </h3>
                     <p className="text-xs text-stone-500">
-                      Complete the form below to tell us about your project requirements.
+                      Complete the brief form below to receive a fast, preliminary project estimate.
                     </p>
                   </div>
 
@@ -239,11 +260,11 @@ export function ConsultationSection() {
                     type="submit"
                     className="w-full bg-[#b45309] hover:bg-[#9a3412] text-white font-bold py-3.5 rounded-xl text-sm sm:text-base shadow-md transition-colors"
                   >
-                    Submit Consultation Request
+                    Get Quick Free Estimate
                   </Button>
 
                   <p className="text-[11px] text-stone-500 text-center pt-1">
-                    We respect your privacy. No spam. Estimates typically scheduled within 24–48 business hours.
+                    We respect your privacy. No spam. Preliminary estimates delivered within 24–48 business hours.
                   </p>
                 </form>
               )}
