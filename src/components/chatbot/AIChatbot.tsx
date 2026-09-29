@@ -32,7 +32,6 @@ const INITIAL_MESSAGE: ChatMessage = {
 const SUGGESTION_PILLS = [
   'Book Free Consultation',
   'What services do you offer?',
-  'Bluestone Patio Cost',
   'Retaining Wall Drainage',
   'Chimney & Fireplace Repair',
   'Service Areas in NJ',
@@ -280,7 +279,7 @@ export function AIChatbot() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.3 }}
               onClick={() => setIsOpen(true)}
-              className="hidden md:flex items-center px-3.5 py-1.5 bg-white/95 backdrop-blur-md text-gray-800 text-xs font-semibold rounded-full border border-purple-200/90 shadow-xl shadow-purple-950/10 cursor-pointer hover:bg-white hover:border-[#7C3AED] hover:text-black hover:scale-105 active:scale-95 transition-all select-none"
+              className="hidden md:flex items-center px-3.5 py-1.5 bg-white/95 backdrop-blur-md text-stone-800 text-xs font-semibold rounded-full border border-amber-200/90 shadow-xl shadow-amber-950/10 cursor-pointer hover:bg-white hover:border-amber-500 hover:text-stone-950 hover:scale-105 active:scale-95 transition-all select-none"
             >
               <span>Ask Stone Concierge</span>
             </motion.div>
@@ -288,7 +287,7 @@ export function AIChatbot() {
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open AI Concierge Chatbot"
-              className="relative w-[54px] h-[54px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-tr from-[#7C3AED] via-[#6D28D9] to-[#8B5CF6] flex items-center justify-center shadow-xl shadow-purple-600/30 border-2 border-white ring-4 ring-purple-100 hover:ring-purple-200 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-400"
+              className="relative w-[54px] h-[54px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-tr from-amber-700 via-amber-600 to-amber-500 flex items-center justify-center shadow-xl shadow-amber-600/35 border-2 border-white ring-4 ring-amber-100 hover:ring-amber-200 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400"
             >
               {/* Chat Bubble Icon with Dot matching template */}
               <div className="relative">
@@ -305,12 +304,12 @@ export function AIChatbot() {
                 </svg>
 
                 {/* Notification Dot in Top Right */}
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full border-2 border-white shadow-xs" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-300 rounded-full border-2 border-white shadow-xs" />
               </div>
 
               {/* Pulsing ring effect for subtle discovery */}
               {hasUnread && (
-                <span className="absolute inset-0 rounded-full border-2 border-purple-400 animate-ping opacity-35 pointer-events-none" />
+                <span className="absolute inset-0 rounded-full border-2 border-amber-400 animate-ping opacity-35 pointer-events-none" />
               )}
             </button>
           </motion.div>
@@ -328,7 +327,7 @@ export function AIChatbot() {
             className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50 w-[calc(100vw-1.25rem)] sm:w-[365px] h-[78vh] sm:h-[535px] max-h-[570px] rounded-[22px] overflow-hidden shadow-2xl border border-gray-200/90 flex flex-col bg-white font-sans"
             style={{
               boxShadow:
-                '0 20px 45px -10px rgba(124, 58, 237, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                '0 20px 45px -10px rgba(217, 119, 6, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.05)',
             }}
           >
             {/* Header: Clean White with Subtle Border & Violet Badges */}

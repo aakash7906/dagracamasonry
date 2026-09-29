@@ -700,7 +700,7 @@ export function Contact() {
                             </p>
                           </div>
                         </div>
-                     
+
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5">
@@ -760,15 +760,14 @@ export function Contact() {
                                   type="button"
                                   disabled={disabled}
                                   onClick={() => setSelectedDate(thisDate)}
-                                  className={`h-7 w-7 mx-auto rounded-lg text-xs font-medium transition-all flex items-center justify-center cursor-pointer ${
-                                    selected
+                                  className={`h-7 w-7 mx-auto rounded-lg text-xs font-medium transition-all flex items-center justify-center cursor-pointer ${selected
                                       ? 'bg-[#b45309] text-white font-bold shadow-xs scale-105'
                                       : disabled
-                                      ? 'text-stone-300 cursor-not-allowed opacity-30'
-                                      : isToday
-                                      ? 'text-amber-800 font-bold border border-amber-400 bg-amber-50 hover:bg-amber-100'
-                                      : 'text-stone-700 hover:bg-white hover:shadow-2xs'
-                                  }`}
+                                        ? 'text-stone-300 cursor-not-allowed opacity-30'
+                                        : isToday
+                                          ? 'text-amber-800 font-bold border border-amber-400 bg-amber-50 hover:bg-amber-100'
+                                          : 'text-stone-700 hover:bg-white hover:shadow-2xs'
+                                    }`}
                                 >
                                   {dayNum}
                                 </button>
@@ -792,19 +791,17 @@ export function Contact() {
                                     key={slot.id}
                                     type="button"
                                     onClick={() => setSelectedSlot(slot.id)}
-                                    className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
-                                      isSelected
+                                    className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${isSelected
                                         ? 'border-[#b45309] bg-amber-50/40 ring-1 ring-[#b45309]/20 shadow-2xs'
                                         : 'border-stone-200 bg-stone-50/70 hover:bg-stone-100 hover:border-stone-300'
-                                    }`}
+                                      }`}
                                   >
                                     <div className="flex items-center gap-2.5">
                                       <div
-                                        className={`h-7 w-7 rounded-lg flex items-center justify-center shrink-0 ${
-                                          isSelected
+                                        className={`h-7 w-7 rounded-lg flex items-center justify-center shrink-0 ${isSelected
                                             ? 'bg-amber-100 text-[#b45309]'
                                             : 'bg-white text-stone-500 border border-stone-200'
-                                        }`}
+                                          }`}
                                       >
                                         <Icon className="h-3.5 w-3.5" />
                                       </div>
@@ -816,11 +813,10 @@ export function Contact() {
                                       </div>
                                     </div>
                                     <div
-                                      className={`h-4 w-4 rounded-full border flex items-center justify-center ${
-                                        isSelected
+                                      className={`h-4 w-4 rounded-full border flex items-center justify-center ${isSelected
                                           ? 'border-[#b45309] bg-[#b45309]'
                                           : 'border-stone-300 bg-white'
-                                      }`}
+                                        }`}
                                     >
                                       {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                                     </div>
@@ -971,11 +967,10 @@ export function Contact() {
                         }}
                         onDragLeave={() => setDragActive(false)}
                         onDrop={handleFileDrop}
-                        className={`p-5 border-2 border-dashed rounded-xl text-center transition-colors cursor-pointer ${
-                          dragActive
+                        className={`p-5 border-2 border-dashed rounded-xl text-center transition-colors cursor-pointer ${dragActive
                             ? 'border-amber-500 bg-amber-50'
                             : 'border-stone-300 bg-stone-50 hover:bg-stone-100/70'
-                        }`}
+                          }`}
                         onClick={() => {
                           const input = document.getElementById('file-upload-input');
                           if (input) input.click();
@@ -1055,15 +1050,9 @@ export function Contact() {
       <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl mx-auto space-y-8">
           <div className="text-center space-y-3">
-            <Badge variant="stone" className="uppercase font-semibold tracking-wider bg-amber-100 text-amber-950 border-amber-300">
-              Common Questions
-            </Badge>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-950 font-heading tracking-tight">
               Frequently Asked Questions
             </h2>
-            <p className="text-stone-500 text-sm">
-              Everything you need to know about scheduling, stone sourcing, and estimate appointments.
-            </p>
           </div>
 
           <Accordion type="single" collapsible defaultValue="item-0" className="space-y-4">
