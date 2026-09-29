@@ -12,6 +12,7 @@ import {
   Check,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ServiceAreasSection } from '@/components/sections/ServiceAreasSection';
 
 const processSteps = [
   {
@@ -50,7 +51,7 @@ export function Services() {
       : servicesData.filter((s) => s.id === activeCategory);
 
   return (
-    <div className="py-12 sm:py-20 bg-stone-50 text-stone-900 min-h-screen">
+    <div className="pt-12 sm:pt-20 pb-0 bg-stone-50 text-stone-900 min-h-screen">
       {/* Header Banner */}
       <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
         <div className="max-w-3xl space-y-4">
@@ -247,7 +248,7 @@ export function Services() {
       </Container>
 
       {/* Consultation Banner CTA */}
-      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-16 sm:mb-20">
         <div className="rounded-md bg-gradient-to-r from-amber-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
@@ -275,6 +276,9 @@ export function Services() {
           </div>
         </div>
       </Container>
+
+      {/* Service Areas Section */}
+      <ServiceAreasSection />
     </div>
   );
 }

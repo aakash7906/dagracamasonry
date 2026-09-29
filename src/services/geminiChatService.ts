@@ -1,6 +1,6 @@
 /**
  * Da Graca Masonry & Stone - AI Chatbot Service
- * Powered by Google Gemini API with robust domain guardrails and instant fallback.
+ * Powered by Google Gemini API with intelligent guardrails, natural concise replies, and instant fallback.
  */
 
 const GEMINI_API_KEY =
@@ -21,34 +21,77 @@ export interface ChatMessage {
   }[];
 }
 
-const SYSTEM_INSTRUCTION = `You are the gentle, warm, and highly skilled AI Stone Concierge for "Da Graca Masonry & Stone", a premier New Jersey luxury stonework and structural masonry contractor with over 25 years of mastery and 1,200+ completed projects.
+const SYSTEM_INSTRUCTION = `You are the friendly, helpful AI Stone Specialist for "Da Graca Masonry & Stone", a premier New Jersey luxury stonework and structural masonry contractor with over 25 years of mastery and 1,200+ completed projects.
 
-CORE RESTRICTIONS & GUARDRAILS:
-1. ONLY discuss Da Graca Masonry, our craftsmanship, services, completed projects, scheduling on-site surveys, requesting quick free estimates, and viewing cart inquiries.
-2. ABSOLUTELY NO OUT-OF-CONTEXT OR UNRELATED TALK. If a user asks about anything outside of masonry, stonework, landscaping, home improvement, or our company services (e.g., coding, politics, recipes, general AI questions), kindly and warmly decline:
-   "I am dedicated exclusively to assisting you with Da Graca Masonry services, stone craftsmanship, and scheduling your estimates. How may I assist you with your masonry project today?"
-3. TONE & MANNER: Always speak with genuine warmth, kindness, professionalism, and gentle hospitality. Keep answers clear, elegant, and avoid overly verbose filler.
-4. ESTIMATE & APPOINTMENT OPTIONS TO GUIDE USERS TO:
-   - "Quick Free Estimate": Preliminary scope and cost quote delivered within 24–48 hours based on details/photos. Available on the Home Page (#consultation-form).
-   - "Detailed On-Site Survey": An in-person structural evaluation with physical laser measurements, elevation checks, and foundation review. Users can choose their preferred date and arrival window on the Contact Page (/contact).
-   - "Cart & Consultation Inquiries": After filling out either estimate form, the inquiry is saved to their Cart (/cart) for review and dispatch with zero obligation.
-5. SERVICES OFFERED:
-   - Natural Stone Masonry (Pennsylvania thermal bluestone, hand-split fieldstone, granite, Tennessee quartzite, limestone).
-   - Engineered Retaining Walls & Gravity Boulder Systems (hillside stabilization with integrated French drains).
-   - Luxury Patios, Walkways & Terraces.
-   - Historic Brick & Lime-Mortar Tuckpointing & Repointing.
-   - Indoor/Outdoor Custom Stone Fireplaces, Hearths & Chimney Rebuilding.
-   - Commercial CMU & Municipal Hardscaping.
-6. SERVICE REGION: All 21 New Jersey counties (including Somerset, Morris, Bergen, Essex, Union, Monmouth, Mercer, Hunterdon) and Eastern Pennsylvania (Bucks County).
-7. CONTACT: Phone: (908) 555-7866 / (908) 555-STONE. License: NJ HIC #13VH09876500, Fully Insured ($2M Liability).
+CRITICAL RULES:
+1. NEVER REPEAT THE WELCOME MESSAGE:
+   - The initial greeting/welcome message ("Hello! Welcome to Da Graca Masonry...") is already displayed to the user at the start of the session.
+   - NEVER repeat "Hello, welcome to Da Graca Masonry & Stone!", "I am your AI assistant...", or re-introduce the company.
+   - If the user sends a greeting (like "hi", "hello", "hey", "namaste"), reply with a brief, friendly greeting (e.g. "Hey! How can I help with your stonework or masonry project today?").
+   - For all other questions, answer directly without intro filler.
 
-Always encourage the client to either schedule an On-Site Survey or request a Quick Free Estimate when discussing project ideas.`;
+2. SHORT & NATURAL RESPONSES BY DEFAULT:
+   - Keep answers concise, human, and conversational (1 to 3 sentences).
+   - Do NOT write essays or unprompted long bullet lists. Speak like a real master craftsman.
+
+3. DETAILED RESPONSES ONLY ON EXPLICIT REQUEST:
+   - Provide a comprehensive, in-depth, or itemized breakdown ONLY if the user explicitly asks for details (e.g. using words like "in detail", "in details", "details", "everything", "in-depth", "brief", "elaborate", "explain all", "step by step", "sab kuch", "puri jankari", "poora").
+
+4. LANGUAGE MATCHING (MANDATORY):
+   - ALWAYS detect and respond in the EXACT SAME LANGUAGE and tone used by the user.
+   - If the user writes in Hindi / Hinglish (e.g. "patio ke liye kaunsa stone best hai?", "kya rate hai?", "kaise book kare?"), respond in natural Hindi / Hinglish.
+   - If the user writes in Spanish, respond in Spanish.
+   - If Portuguese, French, etc., respond in that language.
+   - If English, respond in English.
+
+5. DOMAIN GUARDRAILS:
+   - ONLY discuss masonry, stonework, patios, retaining walls, fireplaces, chimneys, walkways, tuckpointing, estimates, and Da Graca Masonry services.
+   - For completely unrelated topics (coding, politics, recipes, pop culture, general knowledge), politely decline in the user's language and redirect to masonry.
+
+6. COMPANY FACTS & ESTIMATE WORKFLOW:
+   - Quick Free Estimate: 24–48 hr preliminary scope delivered via homepage form (/#consultation).
+   - Detailed On-Site Survey: In-person laser measurement and soil/elevation evaluation booked via Contact page (/contact).
+   - Specialty Materials: Authentic Pennsylvania thermal bluestone, Tennessee quartzite, hand-split fieldstone, granite, limestone.
+   - Service Region: All 21 New Jersey counties and Eastern PA (Bucks County). Phone: (908) 555-7866. NJ License: #13VH09876500, $2M Liability Insured, 10-Year Craftsmanship Guarantee.`;
 
 /**
  * Intelligent local masonry knowledge responder for instant, zero-failure replies
  */
 function getLocalMasonryResponse(query: string): { text: string; actions?: ChatMessage['actions'] } {
-  const q = query.toLowerCase();
+  const q = query.toLowerCase().trim();
+
+  const isHindi = /\b(kya|kaise|karo|batao|chahiye|kitna|kaha|hai|hain|namaste|dhanyavad|apna|hume|hum|daam|kharcha|diwar|patthar|kaunsa|hoga|karna|karenge|bhi|theek|kese)\b/i.test(query);
+  const isSpanish = /\b(hola|gracias|cuanto|cuesta|precio|como|donde|piedra|presupuesto|servicios|estimado|cita|buenos|dias|tardes)\b/i.test(query);
+  const wantsDetails = /\b(detail|details|everything|indepth|in-depth|brief|elaborate|explain|all about|sab kuch|puri jankari|poora|detalle|detalles|completo)\b/i.test(query);
+
+  // Greetings / Small talk - NEVER repeat welcome introduction
+  if (/^(hi|hello|hey|greetings|good\s*(morning|afternoon|evening)|yo|sup|namaste|hola|kem cho|kese ho|kaise ho)(\s+.*)?$/i.test(q) && q.length < 30) {
+    if (isHindi) {
+      return {
+        text: "Namaste! Main aapke stonework ya masonry project me kaise madad kar sakta hoon?",
+        actions: [
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
+    if (isSpanish) {
+      return {
+        text: "¡Hola! ¿En qué puedo ayudarle hoy con su proyecto de albañilería o piedra?",
+        actions: [
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
+    return {
+      text: "Hey! How can I help you with your masonry or stonework project today?",
+      actions: [
+        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+      ],
+    };
+  }
 
   // Out of context / unrelated questions
   if (
@@ -62,17 +105,34 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('joke') ||
     (q.includes('who are you') && !q.includes('da graca') && !q.includes('masonry'))
   ) {
+    if (isHindi) {
+      return {
+        text: "Main sirf Da Graca Masonry aur stonework services ke baare me madad kar sakta hoon. Aapke project ke baare me bataiye, main kaise help karoon?",
+        actions: [
+          { label: 'Explore Our Services', actionType: 'navigate', target: '/services' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
+    if (isSpanish) {
+      return {
+        text: "Estoy dedicado exclusivamente a asistirle con los servicios de albañilería de Da Graca. ¿Cómo puedo ayudarle con su proyecto hoy?",
+        actions: [
+          { label: 'Explore Our Services', actionType: 'navigate', target: '/services' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
     return {
-      text: "I am dedicated exclusively to assisting you with Da Graca Masonry services, natural stone craftsmanship, and scheduling your estimates. How may I assist you with your masonry project today?",
+      text: "I specialize exclusively in Da Graca Masonry services and stone craftsmanship. How can I assist you with your project today?",
       actions: [
-        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
-        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
         { label: 'Explore Our Services', actionType: 'navigate', target: '/services' },
+        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
       ],
     };
   }
 
-  // Booking on-site survey / consultation
+  // Booking / Consultation
   if (
     q.includes('book') ||
     q.includes('appointment') ||
@@ -80,34 +140,84 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('visit') ||
     q.includes('on-site') ||
     q.includes('consultation') ||
-    q.includes('schedule')
+    q.includes('schedule') ||
+    q.includes('milna')
   ) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Aap hamare master mason ke sath comprehensive On-Site Survey schedule kar sakte hain. Isme physical laser measurements, grade evaluation aur natural stone selection shamil hai. Aap direct date aur time window choose kar sakte hain."
+          : "Aap hamare master mason ke sath directly property par on-site survey book kar sakte hain.",
+        actions: [
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
+    if (isSpanish) {
+      return {
+        text: wantsDetails
+          ? "Puede programar una visita en el sitio con nuestro maestro albañil para mediciones con láser, evaluación del terreno y selección de piedra."
+          : "Con gusto programamos una inspección en su propiedad. Puede seleccionar la fecha y hora directamente.",
+        actions: [
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+          { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
     return {
-      text: "We would be delighted to schedule a comprehensive On-Site Survey at your property. Our master mason will conduct physical laser measurements, evaluate grade elevations and soil conditions, and discuss natural stone selections with you. You can select your preferred date and arrival window directly on our survey calendar.",
+      text: wantsDetails
+        ? "We schedule comprehensive On-Site Surveys where our master mason takes physical laser measurements, checks grade elevations, assesses soil stability, and reviews natural stone samples directly with you."
+        : "You can book an in-person On-Site Survey with our master mason directly on our calendar.",
       actions: [
         { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
-        { label: 'Quick Free Estimate Instead', actionType: 'quick_estimate', target: '/#consultation' },
+        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
       ],
     };
   }
 
-  // Quick Free Estimate / cost / pricing
+  // Quick Free Estimate / cost / pricing / kharcha
   if (
     q.includes('quick') ||
     q.includes('free estimate') ||
     q.includes('preliminary') ||
-    q.includes('cost estimate') ||
-    q.includes('quote') ||
     q.includes('cost') ||
+    q.includes('quote') ||
     q.includes('price') ||
     q.includes('pricing') ||
-    q.includes('how much')
+    q.includes('how much') ||
+    q.includes('rate') ||
+    q.includes('kitna') ||
+    q.includes('daam') ||
+    q.includes('kharcha')
   ) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Hamara Quick Free Estimate bilkul free hai. Aap square footage aur photos dete hain, aur hamare chief estimator 24-48 ghante me itemized estimate deliver karte hain."
+          : "Aap homepage se 24–48 ghante me preliminary free estimate pa sakte hain, ya direct survey book kar sakte hain.",
+        actions: [
+          { label: 'Request Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        ],
+      };
+    }
+    if (isSpanish) {
+      return {
+        text: "Ofrecemos presupuestos gratuitos preliminares en 24 a 48 horas sin compromiso.",
+        actions: [
+          { label: 'Request Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        ],
+      };
+    }
     return {
-      text: "You can request a Quick Free Estimate right on our homepage! Our chief estimator reviews your square footage, grade elevation, stone selection (such as Pennsylvania bluestone or hand-split fieldstone), and delivers a preliminary itemized scope within 24 to 48 hours with zero obligation.",
+      text: wantsDetails
+        ? "Our Quick Free Estimate delivers an itemized preliminary cost and scope within 24 to 48 hours based on your project dimensions and photos, completely obligation-free."
+        : "You can get a free preliminary estimate within 24–48 hours directly on our homepage.",
       actions: [
         { label: 'Request Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
-        { label: 'Book Full On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
       ],
     };
   }
@@ -117,15 +227,45 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('cart') ||
     q.includes('inquiry') ||
     q.includes('inquiries') ||
-    q.includes('bag') ||
-    q.includes('sample') ||
-    q.includes('swatch')
+    q.includes('bag')
   ) {
     return {
-      text: "Whenever you submit a Quick Free Estimate or book an On-Site Survey, your request is safely added to your Cart & Consultation Dispatch Hub. From there, you can review your appointment time slot, project notes, or transmit all inquiries directly to our team.",
+      text: isHindi
+        ? "Aapke sabhi estimate requests aur survey bookings Cart me save hoti hain jaha se aap review aur dispatch kar sakte hain."
+        : "Whenever you submit an estimate or survey, your request is saved to your Cart to review before dispatching.",
       actions: [
-        { label: 'View Cart & Inquiries Page', actionType: 'cart', target: '/cart' },
+        { label: 'View Cart & Inquiries', actionType: 'cart', target: '/cart' },
         { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+      ],
+    };
+  }
+
+  // Patios, Walkways & Bluestone
+  if (
+    q.includes('patio') ||
+    q.includes('walkway') ||
+    q.includes('bluestone') ||
+    q.includes('paver') ||
+    q.includes('flagstone')
+  ) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Hum authentic Pennsylvania thermal bluestone, Tennessee quartzite aur natural flagstone use karte hain. Yeh freeze-thaw cycles jhelte hain, dhoop me thande rehte hain aur concrete pavers ki tarah fade nahi hote."
+          : "Hum premium Pennsylvania bluestone aur natural flagstone ke custom patios aur walkways banate hain.",
+        actions: [
+          { label: 'Explore Luxury Patios', actionType: 'navigate', target: '/services#patios-walkways' },
+          { label: 'Request Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        ],
+      };
+    }
+    return {
+      text: wantsDetails
+        ? "We specialize in authentic Pennsylvania thermal bluestone, Tennessee quartzite, and custom flagstone. Unlike manufactured concrete pavers, natural stone stays cool, resists freeze-thaw cracking, and develops an heirloom patina over time."
+        : "We build custom patios and walkways with authentic Pennsylvania bluestone and natural flagstone.",
+      actions: [
+        { label: 'Explore Luxury Patios', actionType: 'navigate', target: '/services#patios-walkways' },
+        { label: 'Request Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
       ],
     };
   }
@@ -137,31 +277,27 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('drainage') ||
     q.includes('slope') ||
     q.includes('hillside') ||
-    q.includes('erosion')
+    q.includes('erosion') ||
+    q.includes('diwar')
   ) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Hamari engineered natural stone retaining walls me heavy gravity foundations, geogrid reinforcement aur integrated perforated French drains hote hain taaki water pressure aur soil erosion control ho sake."
+          : "Hum heavy-duty natural stone retaining walls banate hain jisme proper French drainage system hota hai.",
+        actions: [
+          { label: 'Book Retaining Wall Survey', actionType: 'onsite_survey', target: '/contact' },
+          { label: 'View Retaining Walls', actionType: 'navigate', target: '/services#retaining-walls' },
+        ],
+      };
+    }
     return {
-      text: "Our engineered natural stone retaining walls are built to last generations. We engineer each installation with heavy-duty geotechnical gravity foundations, geogrid reinforcement, and integrated perforated French drain weep systems to handle hydrostatic water pressure seamlessly.",
+      text: wantsDetails
+        ? "Our engineered stone retaining walls are built with heavy geotechnical gravity foundations, geogrid reinforcement, and integrated perforated French drain weep systems to handle hydrostatic water pressure seamlessly."
+        : "We engineer heavy-duty natural stone retaining walls with integrated French drain systems to prevent erosion.",
       actions: [
         { label: 'Book Retaining Wall Survey', actionType: 'onsite_survey', target: '/contact' },
-        { label: 'View Retaining Wall Projects', actionType: 'navigate', target: '/services#retaining-walls' },
-      ],
-    };
-  }
-
-  // Patios, Walkways & Bluestone
-  if (
-    q.includes('patio') ||
-    q.includes('walkway') ||
-    q.includes('bluestone') ||
-    q.includes('paver') ||
-    q.includes('stone vs paver') ||
-    q.includes('flagstone')
-  ) {
-    return {
-      text: "We specialize in authentic Pennsylvania thermal bluestone, Tennessee quartzite, and custom natural flagstone. Unlike manufactured concrete pavers that fade over time, quarried natural stone stays cool under direct sunlight, resists freeze-thaw cycles, and develops a richer patina with age.",
-      actions: [
-        { label: 'Explore Luxury Patios', actionType: 'navigate', target: '/services#patios-walkways' },
-        { label: 'Request Patio Estimate', actionType: 'onsite_survey', target: '/contact' },
+        { label: 'View Retaining Walls', actionType: 'navigate', target: '/services#retaining-walls' },
       ],
     };
   }
@@ -175,44 +311,76 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('repointing') ||
     q.includes('brick')
   ) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Hum hand-carved outdoor/indoor fireplaces, complete chimney rebuilding aur historic lime-mortar tuckpointing karte hain jo pani ko andar aane se rokti hai aur strength banaye rakhti hai."
+          : "Hum custom stone fireplaces, chimney rebuilds aur historic brick tuckpointing provide karte hain.",
+        actions: [
+          { label: 'Explore Fireplaces', actionType: 'navigate', target: '/services#fireplaces-chimneys' },
+          { label: 'Book Inspection', actionType: 'onsite_survey', target: '/contact' },
+        ],
+      };
+    }
     return {
-      text: "From hand-carved Rumford outdoor fireplaces to complete chimney rebuilds and historic lime-mortar tuckpointing, our masons preserve safety and historic charm while preventing water intrusion.",
+      text: wantsDetails
+        ? "We build hand-carved Rumford outdoor/indoor fireplaces, complete chimney rebuilds, and historic lime-mortar tuckpointing to stop water intrusion and restore structural integrity."
+        : "We specialize in custom stone fireplaces, chimney rebuilding, and historic lime-mortar tuckpointing.",
       actions: [
-        { label: 'Explore Fireplaces & Chimneys', actionType: 'navigate', target: '/services#fireplaces-chimneys' },
-        { label: 'Schedule Chimney Inspection', actionType: 'onsite_survey', target: '/contact' },
+        { label: 'Explore Fireplaces', actionType: 'navigate', target: '/services#fireplaces-chimneys' },
+        { label: 'Book Inspection', actionType: 'onsite_survey', target: '/contact' },
       ],
     };
   }
 
-  // Services overview
-  if (q.includes('service') || q.includes('offer') || q.includes('what do you do')) {
+  // Services
+  if (q.includes('service') || q.includes('offer') || q.includes('what do you do') || q.includes('kya karte ho')) {
+    if (isHindi) {
+      return {
+        text: wantsDetails
+          ? "Da Graca Masonry yeh services provide karta hai:\n\n• Natural Stone Masonry (Granite, Limestone, Fieldstone)\n• Bluestone Patios, Walkways & Terraces\n• Engineered Retaining Walls with Drainage\n• Historic Brick & Lime Tuckpointing\n• Outdoor/Indoor Fireplaces & Chimneys\n• Commercial Hardscapes"
+          : "Hum natural stone masonry, bluestone patios, retaining walls, tuckpointing aur stone fireplaces ki services dete hain.",
+        actions: [
+          { label: 'Explore All Services', actionType: 'navigate', target: '/services' },
+          { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        ],
+      };
+    }
     return {
-      text: "Da Graca Masonry provides comprehensive artisan stone craft and structural masonry:\n\n• Architectural Stone Masonry (Fieldstone, Granite, Limestone)\n• Luxury Bluestone Patios, Walkways & Outdoor Living\n• Engineered Natural Stone Retaining Walls\n• Historic Brick & Mortar Tuckpointing\n• Custom Stone Fireplaces & Chimney Rebuilding\n• Commercial Hardscapes & Municipal CMU",
+      text: wantsDetails
+        ? "Da Graca Masonry provides full-scope architectural masonry:\n\n• Architectural Stone Masonry (Fieldstone, Granite, Limestone)\n• Luxury Bluestone Patios, Walkways & Outdoor Living\n• Engineered Retaining Walls with French Drains\n• Historic Lime-Mortar Tuckpointing\n• Custom Stone Fireplaces & Chimney Rebuilding\n• Commercial Hardscapes"
+        : "We offer natural stone masonry, bluestone patios, retaining walls with drainage, historic tuckpointing, and custom fireplaces.",
       actions: [
         { label: 'Explore All Services', actionType: 'navigate', target: '/services' },
         { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
-        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
       ],
     };
   }
 
-  // About Da Graca Masonry / Credentials / History
+  // About / License / Insurance
   if (
     q.includes('about') ||
     q.includes('experience') ||
-    q.includes('who is') ||
-    q.includes('who are') ||
     q.includes('license') ||
     q.includes('insured') ||
-    q.includes('history') ||
-    q.includes('warranty')
+    q.includes('warranty') ||
+    q.includes('who are') ||
+    q.includes('kaun ho')
   ) {
+    if (isHindi) {
+      return {
+        text: "Da Graca Masonry 25+ saalo se New Jersey me kaam kar rahi hai (NJ Lic #13VH09876500). Hamare paas $2M insurance aur 10-Year Craftsmanship Guarantee hai.",
+        actions: [
+          { label: 'Learn More About Us', actionType: 'navigate', target: '/about' },
+          { label: 'View Portfolio', actionType: 'navigate', target: '/gallery' },
+        ],
+      };
+    }
     return {
-      text: "Da Graca Masonry & Stone has been crafting heirloom-quality architectural masonry across New Jersey for over 25 years with 1,200+ completed projects. We are NJ Licensed (HIC #13VH09876500), carry $2M in Commercial Liability & Workers' Comp, and back our structural stonework with a 10-Year Craftsmanship Guarantee.",
+      text: "Da Graca Masonry has 25+ years of experience across NJ with 1,200+ completed projects, full licensing (NJ HIC #13VH09876500), $2M liability insurance, and a 10-Year Craftsmanship Guarantee.",
       actions: [
         { label: 'Learn More About Us', actionType: 'navigate', target: '/about' },
-        { label: 'View Project Portfolio', actionType: 'navigate', target: '/gallery' },
-        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+        { label: 'View Portfolio', actionType: 'navigate', target: '/gallery' },
       ],
     };
   }
@@ -224,10 +392,13 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     q.includes('project') ||
     q.includes('photos') ||
     q.includes('pictures') ||
-    q.includes('work')
+    q.includes('work') ||
+    q.includes('photo')
   ) {
     return {
-      text: "We invite you to explore our gallery of completed estates, custom bluestone courtyards, precision retaining walls, and outdoor living sanctuaries across Somerset, Morris, and Bergen counties.",
+      text: isHindi
+        ? "Aap hamare completed bluestone courtyards, precision retaining walls aur outdoor living projects ki gallery dekh sakte hain."
+        : "You can explore our gallery of completed estates, bluestone patios, and precision retaining walls across New Jersey.",
       actions: [
         { label: 'View Project Gallery', actionType: 'navigate', target: '/gallery' },
         { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
@@ -235,24 +406,32 @@ function getLocalMasonryResponse(query: string): { text: string; actions?: ChatM
     };
   }
 
-  // Service Areas
-  if (q.includes('area') || q.includes('location') || q.includes('where') || q.includes('county') || q.includes('jersey') || q.includes('nj')) {
+  // Default natural short response
+  if (isHindi) {
     return {
-      text: "We proudly serve all 21 New Jersey counties — including Somerset, Morris, Bergen, Essex, Union, Monmouth, Mercer, and Hunterdon — as well as Eastern Pennsylvania (Bucks County) and the NY Metro area. We travel directly to your property for all site consultations.",
+      text: "Main aapke masonry aur stonework project me kaise madad kar sakta hoon? Aap quick estimate ya on-site survey book kar sakte hain.",
       actions: [
-        { label: 'Book NJ On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
-        { label: 'Call (908) 555-7866', actionType: 'call', target: 'tel:9085557866' },
+        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
       ],
     };
   }
 
-  // Default warm response
+  if (isSpanish) {
+    return {
+      text: "¿Cómo puedo asistirle hoy con su proyecto de albañilería o piedra natural?",
+      actions: [
+        { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
+        { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
+      ],
+    };
+  }
+
   return {
-    text: "Thank you for reaching out to Da Graca Masonry & Stone. We are dedicated to delivering museum-grade natural stone craftsmanship. Would you like to schedule a complimentary On-Site Survey, request a Quick Free Estimate, or explore our portfolio?",
+    text: "How can I assist with your masonry project today? Would you like a quick estimate or to book an on-site survey?",
     actions: [
-      { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
       { label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' },
-      { label: 'View Our Projects', actionType: 'navigate', target: '/gallery' },
+      { label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' },
     ],
   };
 }
@@ -297,7 +476,7 @@ export async function sendChatMessageToGemini(
           },
           generationConfig: {
             temperature: 0.3,
-            maxOutputTokens: 500,
+            maxOutputTokens: 400,
           },
         }),
       });
@@ -305,9 +484,14 @@ export async function sendChatMessageToGemini(
       if (response.ok) {
         const data = await response.json();
         const candidate = data.candidates?.[0];
-        const textResponse = candidate?.content?.parts?.[0]?.text;
+        let textResponse = candidate?.content?.parts?.[0]?.text;
 
         if (textResponse && textResponse.trim().length > 0) {
+          // Clean up repetitive welcome phrase if model inadvertently adds it mid-conversation
+          textResponse = textResponse
+            .replace(/^hello!?\s*welcome to (da graca masonry & stone|da graca masonry)[.!]?\s*(i['’]m your ai [^.!?]+[.!?])?\s*/i, '')
+            .trim();
+
           // Provide matching direct action buttons based on topic
           const lower = (userMessage + ' ' + textResponse).toLowerCase();
           const actions: ChatMessage['actions'] = [];
@@ -315,13 +499,13 @@ export async function sendChatMessageToGemini(
           if (lower.includes('survey') || lower.includes('appointment') || lower.includes('on-site')) {
             actions.push({ label: 'Book On-Site Survey', actionType: 'onsite_survey', target: '/contact' });
           }
-          if (lower.includes('estimate') || lower.includes('quick') || lower.includes('quote')) {
+          if (lower.includes('estimate') || lower.includes('quick') || lower.includes('quote') || lower.includes('cost') || lower.includes('price')) {
             actions.push({ label: 'Quick Free Estimate', actionType: 'quick_estimate', target: '/#consultation' });
           }
           if (lower.includes('cart') || lower.includes('inquiry')) {
             actions.push({ label: 'View Cart & Inquiries', actionType: 'cart', target: '/cart' });
           }
-          if (lower.includes('service') || lower.includes('patio') || lower.includes('wall')) {
+          if (lower.includes('service') || lower.includes('patio') || lower.includes('wall') || lower.includes('fireplace')) {
             actions.push({ label: 'Explore Services', actionType: 'navigate', target: '/services' });
           }
 
@@ -333,7 +517,7 @@ export async function sendChatMessageToGemini(
           }
 
           return {
-            text: textResponse.trim(),
+            text: textResponse || getLocalMasonryResponse(userMessage).text,
             actions,
           };
         }
@@ -343,6 +527,6 @@ export async function sendChatMessageToGemini(
     }
   }
 
-  // Graceful, warm local fallback guaranteed to always respond instantly with accuracy
+  // Graceful, natural local fallback guaranteed to always respond instantly with accuracy
   return getLocalMasonryResponse(userMessage);
 }

@@ -9,17 +9,30 @@ export function Layout() {
 
   useEffect(() => {
     if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        const header = document.querySelector('header');
-        const headerHeight = header ? header.getBoundingClientRect().height : 108;
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: Math.max(0, elementPosition - headerHeight),
-          behavior: 'smooth',
-        });
-        return;
+      const scrollToHash = () => {
+        const element = document.querySelector(hash);
+        if (element) {
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.getBoundingClientRect().height : 108;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, elementPosition - headerHeight),
+            behavior: 'smooth',
+          });
+          return true;
+        }
+        return false;
+      };
+
+      if (!scrollToHash()) {
+        const timer1 = setTimeout(scrollToHash, 100);
+        const timer2 = setTimeout(scrollToHash, 300);
+        return () => {
+          clearTimeout(timer1);
+          clearTimeout(timer2);
+        };
       }
+      return;
     }
     window.scrollTo(0, 0);
   }, [pathname, hash]);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/Badge';
@@ -98,6 +98,25 @@ export function Contact() {
   const [formData, setFormData] = useState<ContactFormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+
+  // FAQ state & click-outside handling
+  const [openFaq, setOpenFaq] = useState<string>('');
+  const faqContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        openFaq &&
+        faqContainerRef.current &&
+        !faqContainerRef.current.contains(event.target as Node)
+      ) {
+        setOpenFaq('');
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [openFaq]);
 
   // Geolocation state
   const [isLocating, setIsLocating] = useState(false);
@@ -431,8 +450,8 @@ export function Contact() {
       </Container>
 
       {/* Main Form & Scope Section */}
-      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20">
-        <div className="rounded-md bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-20 scroll-mt-24 sm:scroll-mt-28" id="onsite-survey">
+        <div id="survey-form" className="rounded-md bg-stone-100/80 border border-stone-200 p-4 sm:p-8 lg:p-14 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Info Column */}
             <div className="lg:col-span-5 space-y-6">
@@ -1047,15 +1066,24 @@ export function Contact() {
       </Container>
 
       {/* Interactive FAQ Section */}
-      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-14">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <div className="text-center space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-950 font-heading tracking-tight">
+      <Container size="full" className="max-w-[1560px] px-4 sm:px-6 lg:px-8 xl:px-10 mb-16 lg:mb-20">
+        <div ref={faqContainerRef} className="max-w-5xl xl:max-w-6xl mx-auto space-y-8">
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-950 font-heading tracking-tight">
               Frequently Asked Questions
             </h2>
+            <p className="text-stone-600 text-sm sm:text-base">
+              Clear answers regarding on-site surveys, preliminary estimates, natural stone sourcing, and warranties.
+            </p>
           </div>
 
-          <Accordion type="single" collapsible defaultValue="item-0" className="space-y-4">
+          <Accordion
+            type="single"
+            collapsible
+            value={openFaq}
+            onValueChange={setOpenFaq}
+            className="space-y-4"
+          >
             {faqs.map((faq, idx) => (
               <AccordionItem key={faq.q} value={`item-${idx}`}>
                 <AccordionTrigger>
