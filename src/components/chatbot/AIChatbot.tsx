@@ -304,7 +304,7 @@ export function AIChatbot() {
               onClick={() => setIsOpen(true)}
               className="hidden md:flex items-center px-3.5 py-1.5 bg-white/95 backdrop-blur-md text-stone-800 text-xs font-semibold rounded-full border border-amber-200/90 shadow-xl shadow-amber-950/10 cursor-pointer hover:bg-white hover:border-amber-500 hover:text-stone-950 hover:scale-105 active:scale-95 transition-all select-none"
             >
-              <span>Ask Stone Concierge</span>
+              <span>Ask Me</span>
             </motion.div>
 
             <button
@@ -377,7 +377,7 @@ export function AIChatbot() {
 
                 <div className="flex flex-col min-w-0">
                   <h3 className="font-heading font-extrabold text-stone-900 text-[11.5px] sm:text-[15px] tracking-tight truncate leading-tight flex items-center gap-1">
-                    Da Graca Concierge
+                    Da Graca Assistant
                     <span className="hidden xs:inline-block px-1 sm:px-1.5 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 text-[8px] sm:text-[9px] font-bold rounded-sm tracking-wide uppercase">
                       AI
                     </span>
