@@ -2,7 +2,7 @@ import type { NavItem, ServiceItem, ProjectItem, GalleryItem, TestimonialItem, C
 
 export const navigationLinks: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
+  { label: 'Services & Area', href: '/services' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'About Us', href: '/about' },
   { label: 'Testimonials', href: '/testimonials' },
